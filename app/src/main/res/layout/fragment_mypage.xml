@@ -4,52 +4,195 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/mypage_back_ll"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_profile_cl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
-        android:background="@color/main_color"/>
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/mypage_background_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/main_color"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/mypage_img_cv"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="85dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
-        <ImageView
-            android:id="@+id/mypage_img_iv"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mypage_img_cv"
             android:layout_width="170dp"
             android:layout_height="170dp"
-            android:src="@drawable/omi"
-            android:scaleType="centerCrop"
-            />
-    </androidx.cardview.widget.CardView>
+            app:cardCornerRadius="85dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <ImageView
+                android:id="@+id/mypage_img_iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/omi"
+                android:scaleType="centerCrop"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/mypage_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/mypage_img_cv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="이름"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+
+        //사진 밑 구분 뷰
+        <View
+            android:id="@+id/mypage_view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#F1ECEC"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+//프로필 밑 설정들
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_setting_cl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintTop_toBottomOf="@id/mypage_profile_cl"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp">
+
+        <TextView
+            android:id="@+id/mypage_myprofile_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/mypage_myactivity_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="내 프로필"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mypage_myactivity_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_myprofile_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_buy_list_tv"
+            android:text="내 활동"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mypage_buy_list_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_myactivity_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_change_pwd_tv"
+            android:text="구매내역"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mypage_change_pwd_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_buy_list_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_view2"
+            android:text="비밀번호 변경"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+//뷰
+        <View
+            android:id="@+id/mypage_view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_change_pwd_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_setting_tv"
+            android:layout_marginTop="15dp"
+            android:background="#F1ECEC"/>
+
+        <TextView
+            android:id="@+id/mypage_setting_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_view2"
+            app:layout_constraintBottom_toTopOf="@id/mypage_app_info_tv"
+            android:text="환경 설정"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mypage_app_info_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_setting_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_ask_tv"
+            android:text="앱 정보"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/mypage_ask_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_app_info_tv"
+            app:layout_constraintBottom_toTopOf="@id/mypage_view3"
+            android:text="문의하기"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+//뷰
+        <View
+            android:id="@+id/mypage_view3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mypage_ask_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="15dp"
+            android:background="#F1ECEC"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+//로그아웃
     <TextView
-        android:id="@+id/mypage_name_tv"
+        android:id="@+id/mypage_logout_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mypage_img_cv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:text="이름"
+        android:text="로그아웃"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="15sp"/>
-
-
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_setting_cl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
