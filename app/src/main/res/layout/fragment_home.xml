@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    //뒤에 초록 배경
+    <TextView
+        android:id="@+id/home_background_green_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        android:background="@color/main_color"/>
+
+// 줍깅 로고
+    <ImageView
+        android:id="@+id/home_logo_iv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:src="@drawable/logo_white"/>
+
+    <TextView
+        android:id="@+id/home_logo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/home_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/home_logo_iv"
+        app:layout_constraintStart_toEndOf="@id/home_logo_iv"
+        android:layout_marginStart="10dp"
+        android:text="JUBGING"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_picture_cl"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/home_pictrue_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_logo_iv">
+
+        <TextView
+            android:id="@+id/home_picture_ground_tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/home_ground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.18"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/home_sun_iv"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sun"
+            app:layout_constraintStart_toStartOf="@id/home_picture_cl"
+            app:layout_constraintTop_toTopOf="@id/home_picture_cl" />
+
+
+        //새싹
+
+        <ImageView
+            android:id="@+id/home_plant_small_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/plant"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_plant_medium_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/plant"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_plant_large_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/plant"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        //나뭇가지
+
+        <ImageView
+            android:id="@+id/home_branch_small_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/tree_brown"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_branch_medium_iv"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/tree_brown"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_branch_large_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/tree_brown"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        //나무
+
+        <ImageView
+            android:id="@+id/home_tree_small_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/tree_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_tree_medium_iv"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/tree_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/home_tree_large_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/tree_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/home_picture_ground_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_goal_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/home_picture_cl"
+        android:background="">
+
+        <ImageView
+            android:id="@+id/home_goal_1_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/home_goal_2_iv"
+            android:src="@drawable/earth_black"/>
+
+        <ImageView
+            android:id="@+id/home_goal_2_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toEndOf="@id/home_goal_1_iv"
+            app:layout_constraintEnd_toStartOf="@id/home_goal_3_iv"
+            app:layout_constraintTop_toTopOf="@id/home_goal_1_iv"
+            android:src="@drawable/earth_black"/>
+
+        <ImageView
+            android:id="@+id/home_goal_3_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toEndOf="@id/home_goal_2_iv"
+            app:layout_constraintEnd_toStartOf="@id/home_goal_4_iv"
+            app:layout_constraintTop_toTopOf="@id/home_goal_1_iv"
+            android:src="@drawable/earth_color"/>
+
+        <ImageView
+            android:id="@+id/home_goal_4_iv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintStart_toEndOf="@id/home_goal_3_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/home_goal_1_iv"
+            android:src="@drawable/earth_color"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_data_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/home_picture_cl"
+        app:layout_constraintTop_toBottomOf="@id/home_goal_cl"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/home_walk_ll"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            app:layout_constraintWidth_percent="0.38"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="38dp"
+            android:background="@drawable/round_rectangle_stroke_green"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/home_walk_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10000"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/home_walk_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="걸음"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_distance_ll"
+            android:layout_width="0dp"
+            android:layout_height="95dp"
+            app:layout_constraintWidth_percent="0.38"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="38dp"
+            android:background="@drawable/round_rectangle_solid_green"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/home_distance_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10000"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/home_distance_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Km"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_kcal_ll"
+            android:layout_width="0dp"
+            android:layout_height="95dp"
+            app:layout_constraintWidth_percent="0.38"
+            app:layout_constraintTop_toBottomOf="@id/home_walk_ll"
+            app:layout_constraintStart_toStartOf="@id/home_walk_ll"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_rectangle_solid_green"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/home_kcal_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/home_kcal_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kcal"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_point_cl"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            app:layout_constraintWidth_percent="0.38"
+            app:layout_constraintTop_toBottomOf="@id/home_distance_ll"
+            app:layout_constraintEnd_toEndOf="@id/home_distance_ll"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_rectangle_stroke_green">
+
+            <TextView
+                android:id="@+id/home_point_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="5dp"
+                android:text="10000"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/home_point_iv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="2.1dp"
+                android:src="@drawable/plant_mini_green"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
