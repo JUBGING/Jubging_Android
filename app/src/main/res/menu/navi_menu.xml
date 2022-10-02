@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/jubgingFragment"
+        android:enabled="true"
+        android:title="@string/menu_jubging"
+        android:icon="@drawable/logo_black"/>
+
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:title="@string/menu_home"
+        android:icon="@drawable/home_black"/>
+
+    <item
+        android:id="@+id/shopFragment"
+        android:enabled="true"
+        android:title="@string/menu_shop"
+        android:icon="@drawable/shop_black"/>
+
+    <item
+        android:id="@+id/mypageFragment"
+        android:enabled="true"
+        android:title="@string/menu_mypage"
+        android:icon="@drawable/myprofile_black"/>
+
+
+</menu>

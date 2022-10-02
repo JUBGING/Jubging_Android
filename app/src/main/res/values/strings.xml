@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Jubging</string>
+
+    <!--메뉴-->
+    <string name="menu_home">홈</string>
+    <string name="menu_mypage">마이페이지</string>
+    <string name="menu_jubging">줍깅</string>
+    <string name="menu_shop">새싹샵</string>
+</resources>
