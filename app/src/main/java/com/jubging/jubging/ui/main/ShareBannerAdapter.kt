@@ -1,4 +1,19 @@
 package com.jubging.jubging.ui.main
 
-class ShareBannerAdapter {
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.jubging.jubging.ui.jubging.ShareActivity
+
+class ShareBannerAdapter(fragment: ShareActivity) : FragmentStateAdapter(fragment) {
+
+    private val fragmentlist : ArrayList<Fragment> = ArrayList()
+
+    override fun getItemCount(): Int = fragmentlist.size
+
+    override fun createFragment(position: Int): Fragment = fragmentlist[position]
+
+    fun addFragment(fragment: Fragment){
+        fragmentlist.add(fragment)
+        notifyItemInserted(fragmentlist.size - 1)
+    }
 }
