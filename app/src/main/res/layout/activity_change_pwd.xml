@@ -44,15 +44,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="새로운 비밀번호"
-            android:textSize="17sp"
-            android:textColor="black"/>
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/change_pwd_new_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="새로운 비밀번호"
             android:maxLines="1"
             android:minHeight="48dp"
             android:paddingStart="5dp"
@@ -69,15 +68,14 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="25dp"
             android:text="새로운 비밀번호 확인"
-            android:textSize="17sp"
-            android:textColor="black"/>
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/change_pwd_check_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="새비밀번호 다시 입력"
             android:maxLines="1"
             android:minHeight="48dp"
             android:paddingStart="5dp"

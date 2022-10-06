@@ -74,7 +74,7 @@
             android:hint="비밀번호"
             android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@id/login_email_et"
-            app:layout_constraintBottom_toTopOf=""
+            app:layout_constraintBottom_toTopOf="@id/login_login_tv"
             android:layout_marginStart="35dp"
             android:layout_marginEnd="35dp"
             android:layout_marginTop="20dp"
