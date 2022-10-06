@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jubging.md.ui.main.home.HomeFragment"
+        android:name="com.jubging.jubging.ui.main.HomeFragment"
         android:label="homeFragment"/>
 
     <fragment
         android:id="@+id/jubgingFragment"
-        android:name="com.jubging.md.ui.main.community.CommunityFragment"
+        android:name="com.jubging.jubging.ui.jubging.JubgingFragment"
         android:label="jubgingFragment"/>
 
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.jubging.md.ui.main.community.CommunityFragment"
+        android:name="com.jubging.jubging.ui.shop.ShopFragment"
         android:label="shopFragment"/>
 
     <fragment
         android:id="@+id/mypageFragment"
-        android:name="com.jubging.md.ui.main.mypage.MypageFragment"
+        android:name="com.jubging.jubging.ui.mypage.MypageFragment"
         android:label="mypageFragment"/>
 
 </navigation>

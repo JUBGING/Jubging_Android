@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="거리"
+                android:fontFamily="@font/regular"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
@@ -65,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5.00"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -75,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="KM"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -89,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="칼로리"
+                android:fontFamily="@font/regular"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
@@ -104,6 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="203"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -114,6 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="KCAL"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -127,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="시간"
+                android:fontFamily="@font/regular"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
@@ -142,6 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00:00:00"
+                    android:fontFamily="@font/regular"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -155,6 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="걸음 수"
+                    android:fontFamily="@font/regular"
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
@@ -170,6 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10"
+                        android:fontFamily="@font/regular"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"/>

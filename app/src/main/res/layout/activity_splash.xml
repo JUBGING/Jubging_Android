@@ -31,6 +31,7 @@
             app:layout_constraintStart_toStartOf="@id/splash_logo_iv"
             app:layout_constraintEnd_toEndOf="@id/splash_logo_iv"
             android:text="JUBGING"
+            android:fontFamily="@font/main_bold"
             android:textSize="40dp"
             android:textColor="@color/white"
             android:textStyle="bold"

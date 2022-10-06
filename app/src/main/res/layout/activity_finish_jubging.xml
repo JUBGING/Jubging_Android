@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="줍깅 완료!"
-            android:textStyle="bold"
+            android:fontFamily="@font/main_bold"
             android:textColor="@color/black"
             android:textSize="25dp"/>
 

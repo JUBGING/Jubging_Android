@@ -4,28 +4,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/change_pwd_back_iv"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/back_black"/>
 
     <TextView
         android:id="@+id/change_pwd_title_tv"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="@color/main_color"
-        android:text="비밀번호 변경"
-        android:textSize="22sp"
-        android:textColor="@color/black"
         android:gravity="center_vertical"
-        android:paddingStart="50dp"/>
+        android:paddingStart="50dp"
+        android:text="비밀번호 변경"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/change_pwd_back_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="@id/change_pwd_title_tv"
+        app:layout_constraintBottom_toBottomOf="@id/change_pwd_title_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/back_black"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/change_pwd_cl"
@@ -44,6 +46,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="새로운 비밀번호"
+            android:fontFamily="@font/regular"
             android:textSize="15sp"
             android:textColor="@color/black"/>
 
@@ -56,6 +59,8 @@
             android:minHeight="48dp"
             android:paddingStart="5dp"
             android:textSize="17sp"
+            android:fontFamily="@font/regular"
+            android:backgroundTint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/change_pwd_new_tv" />
 
@@ -68,6 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="25dp"
             android:text="새로운 비밀번호 확인"
+            android:fontFamily="@font/regular"
             android:textSize="15sp"
             android:textColor="@color/black"/>
 
@@ -80,6 +86,8 @@
             android:minHeight="48dp"
             android:paddingStart="5dp"
             android:textSize="17sp"
+            android:fontFamily="@font/regular"
+            android:backgroundTint="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/change_pwd_check_tv" />
 
@@ -95,6 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="저장"
         android:textColor="@color/white"
+        android:fontFamily="@font/regular"
         android:textStyle="bold"
         android:textSize="17sp"
         android:gravity="center"

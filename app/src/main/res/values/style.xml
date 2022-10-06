@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style
+        name="TextViewFontStyle"
+        parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="fontFamily">
+            @font/thin
+        </item>
+    </style>
+
+    <style
+        name="EditTextFontStyle"
+        parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="fontFamily">
+            @font/thin</item>
+    </style>
+
+</resources>

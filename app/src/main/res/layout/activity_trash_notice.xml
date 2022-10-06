@@ -45,6 +45,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:text="줍줍이에게 쓰레기를 \n 버려주세요!"
+            android:fontFamily="@font/main_bold"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25dp"
@@ -52,10 +53,11 @@
 
         <TextView
             android:id="@+id/trash_notice_btn_tv"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:text="줍줍이 닫기"
+            android:fontFamily="@font/thin"
             android:textSize="18dp"
             android:textColor="@color/black"
             android:textStyle="bold"
