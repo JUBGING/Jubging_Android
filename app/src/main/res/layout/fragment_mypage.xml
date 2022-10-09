@@ -9,7 +9,7 @@
         android:id="@+id/mypage_profile_cl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.45"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="이름"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="17sp"/>
@@ -88,7 +88,7 @@
             app:layout_constraintBottom_toTopOf="@id/mypage_myactivity_tv"
             app:layout_constraintStart_toStartOf="parent"
             android:text="내 프로필"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_myprofile_tv"
             app:layout_constraintBottom_toTopOf="@id/mypage_buy_list_tv"
             android:text="내 활동"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -112,7 +112,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_myactivity_tv"
             app:layout_constraintBottom_toTopOf="@id/mypage_change_pwd_tv"
             android:text="구매내역"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -124,7 +124,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_buy_list_tv"
             app:layout_constraintBottom_toTopOf="@id/mypage_view2"
             android:text="비밀번호 변경"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 //뷰
@@ -146,7 +146,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_view2"
             app:layout_constraintBottom_toTopOf="@id/mypage_app_info_tv"
             android:text="환경 설정"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -158,7 +158,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_setting_tv"
             app:layout_constraintBottom_toTopOf="@id/mypage_ask_tv"
             android:text="앱 정보"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -170,7 +170,7 @@
             app:layout_constraintTop_toBottomOf="@id/mypage_app_info_tv"
             app:layout_constraintBottom_toTopOf="@id/mypage_view3"
             android:text="문의하기"
-            android:fontFamily="@font/normal"
+            android:fontFamily="@font/regular"
             android:textColor="@color/black"
             android:textSize="17sp"/>
 
@@ -194,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그아웃"
-        android:fontFamily="@font/normal"
+        android:fontFamily="@font/regular"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"

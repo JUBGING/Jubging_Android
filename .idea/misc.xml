@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/drawable-v24/bottom_icon_color.xml" value="0.1" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/drawable/edittext_rounded_rectangle.xml" value="0.1" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/drawable/home_ground.xml" value="0.1" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/drawable/home_pictrue_background.xml" value="0.1" />
@@ -16,7 +17,7 @@
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_finish_jubging.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_jipgae_notice.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_myprofile.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_share.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
@@ -24,8 +25,8 @@
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_trash_notice.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_banner.xml" value="0.1" />
-        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_jubging.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_jubging.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_jubging_data.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_mypage.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_shop.xml" value="0.22393162393162394" />
