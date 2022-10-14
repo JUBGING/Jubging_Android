@@ -17,8 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jubging"
-        tools:targetApi="31"
-
         android:largeHeap="true"
         >
 
@@ -43,20 +41,40 @@
 // 로그인, 회원가입
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="true"
-            tools:ignore="Instantiatable" />
+            android:exported="true" />
 
-<!--        <activity-->
-<!--            android:name=".ui.signup.SignUpActivity"-->
-<!--            android:exported="true" />-->
+        <activity
+            android:name=".ui.signUp.SignUpActivity"
+            android:exported="true" />
 
-<!--        <activity-->
-<!--            android:name=".ui.signup.SignUpDoneActivity"-->
-<!--            android:exported="true" />-->
+        <activity
+            android:name=".ui.signUp.SignUpDoneActivity"
+            android:exported="true" />
 
 // 줍깅
         <activity
             android:name=".ui.jubging.ShareActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.jubging.FinishJubgingActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.jubging.JipgaeNoticeActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.jubging.TrashNoticeActivity"
+            android:exported="true" />
+
+//마이페이지
+        <activity
+            android:name=".ui.mypage.ChangePwdActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.mypage.MyprofileActivity"
             android:exported="true" />
 
     </application>

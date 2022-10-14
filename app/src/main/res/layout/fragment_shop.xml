@@ -18,7 +18,7 @@
         android:textSize="15sp"
         android:fontFamily="@font/regular"
         android:maxLines="1"
-        android:paddingStart="5dp"/>
+        android:paddingStart="10dp"/>
 
     <ImageView
         android:id="@+id/shop_search_iv"

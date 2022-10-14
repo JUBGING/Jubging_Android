@@ -1,4 +1,10 @@
 package com.jubging.jubging.ui.mypage
 
-class MyprofileActivity {
+import com.jubging.jubging.databinding.ActivityMyprofileBinding
+import com.jubging.jubging.ui.base.BaseActivity
+
+class MyprofileActivity:BaseActivity<ActivityMyprofileBinding>(ActivityMyprofileBinding::inflate) {
+    override fun initAfterBinding() {
+
+    }
 }
