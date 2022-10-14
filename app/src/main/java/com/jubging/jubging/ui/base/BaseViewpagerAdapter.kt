@@ -11,8 +11,7 @@ class BaseViewpagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) 
 
     override fun createFragment(position: Int): Fragment = fragmentList[position]
 
-    fun addFragment(fragment: Fragment)
-    {
+    fun addFragment(fragment: Fragment) {
         fragmentList.add(fragment)
         notifyItemInserted(fragmentList.size - 1)
     }

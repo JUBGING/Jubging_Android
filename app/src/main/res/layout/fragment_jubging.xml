@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="@id/jubging_trash_num_tv"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/bold_num"
-            android:text="중앙대 정문adfasdf"
+            android:text="중앙대 정문"
             android:maxLines="1"
             android:ellipsize="end"
             android:textColor="@color/black"

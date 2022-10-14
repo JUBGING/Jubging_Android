@@ -1,10 +1,10 @@
-package com.jubging.jubging.ui.main
+package com.jubging.jubging.ui.shop
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.jubging.jubging.ui.jubging.ShareActivity
 
-class ShareBannerAdapter(fragment: ShareActivity) : FragmentStateAdapter(fragment) {
+class ShopBannerAdapter(fragment: ShopFragment) : FragmentStateAdapter(fragment) {
 
     private val fragmentlist : ArrayList<Fragment> = ArrayList()
 

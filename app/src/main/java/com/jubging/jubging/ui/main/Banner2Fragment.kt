@@ -5,13 +5,13 @@ import com.jubging.jubging.databinding.FragmentBannerBinding
 import com.jubging.jubging.ui.base.BaseFragment
 
 
-class BannerFragment(): BaseFragment<FragmentBannerBinding>(FragmentBannerBinding::inflate)
+class Banner2Fragment(): BaseFragment<FragmentBannerBinding>(FragmentBannerBinding::inflate)
 {
 
     override fun initAfterBinding() {
         
         
-        binding.bannerImageIv.setImageResource(R.drawable.banner_0)
+        binding.bannerImageIv.setImageResource(R.drawable.banner_1)
     }
 
 }
