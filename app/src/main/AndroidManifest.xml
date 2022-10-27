@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Jubging"
         android:largeHeap="true"
+        android:usesCleartextTraffic="true"
         >
 
 

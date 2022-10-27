@@ -7,14 +7,19 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-class XAccessTokenInterceptor: Interceptor {
+//일일이 토큰 헤더를 붙이면 코드 중복 & 관리 번거롭
+//okHttp3 인터셉터 활용 -> 모든 api 요청에 자동으로 토큰 세팅
+
+class AuthorizationTokenInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
 
-        val jwtToken: String? = getJwt() //디바이스에 jwt가 있을 때 가져옴
+        //디바이스에 jwt가 있을 때 가져옴
+        val jwtToken: String? = getJwt()
 
+        //jwt가 null이 아닐때 헤더에 넣어줌
         jwtToken?.let{
-            builder.addHeader(ApplicationClass.X_AUTH_TOKEN, jwtToken) //null이 아닐때 헤더에 넣어줌
+            builder.addHeader(ApplicationClass.Authorization, jwtToken)
         }
 
         return chain.proceed(builder.build())
