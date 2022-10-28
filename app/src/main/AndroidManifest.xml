@@ -21,6 +21,11 @@
         android:usesCleartextTraffic="true"
         >
 
+//구글 api 키
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBmOGGqKZTScEPyWgXpNdlHfdFPilWNNKk"/>
+
 
 //splash activity 설정
         <activity

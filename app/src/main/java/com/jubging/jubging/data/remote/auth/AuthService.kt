@@ -27,29 +27,26 @@ object AuthService {
         authService.signUp(user).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
 
-                when (response.code()) {
-                    200 -> {
-                        val resp = response.body()!!
-                        signUpView.onSignUpSuccess()}
-
-                    400 ->{
-                        var jsonObject: JSONObject? = null
-                        var errorDto : ErrorResponse? = null
-                        try{
-                            jsonObject = JSONObject(response.errorBody()!!.string())
-                            val errorCode = jsonObject.getInt("errorCode")
-                            val message = jsonObject.getString("message")
-                            errorDto = ErrorResponse(errorCode= errorCode, message)
-                        }
-                        catch (e: JSONException){
-                            e.printStackTrace()
-                        }
-
-                        if (errorDto != null) {
-                            signUpView.onSignUpFailure(errorDto.errorCode, errorDto.message)
-                        }
+                if(response.isSuccessful){
+                    val resp = response.body()!!
+                    signUpView.onSignUpSuccess()
+                }
+                else{
+                    var jsonObject: JSONObject? = null
+                    var errorDto : ErrorResponse? = null
+                    try{
+                        jsonObject = JSONObject(response.errorBody()!!.string())
+                        val errorCode = jsonObject.getInt("errorCode")
+                        val message = jsonObject.getString("message")
+                        errorDto = ErrorResponse(errorCode= errorCode, message)
+                    }
+                    catch (e: JSONException){
+                        e.printStackTrace()
                     }
 
+                    if (errorDto != null) {
+                        signUpView.onSignUpFailure(errorDto.errorCode, errorDto.message)
+                    }
                 }
 
             }
@@ -71,33 +68,28 @@ object AuthService {
                 Log.d("로그인", user.toString())
                 Log.d("응답", response.errorBody()?.string().toString())
 
-                when (response.code()) {
-
-                    200 -> {
-                        val resp = response.body()!!
-                        loginView.onLoginSuccess(resp)
+                if(response.isSuccessful){
+                    val resp = response.body()!!
+                    loginView.onLoginSuccess(resp)
+                }
+                else{
+                    var jsonObject: JSONObject? = null
+                    var errorDto : ErrorResponse? = null
+                    try{
+                        jsonObject = JSONObject(response.errorBody()!!.string())
+                        val errorCode = jsonObject.getInt("errorCode")
+                        val message = jsonObject.getString("message")
+                        errorDto = ErrorResponse(errorCode= errorCode, message)
+                    }
+                    catch (e: JSONException){
+                        e.printStackTrace()
                     }
 
-                    400 ->{
-                        var jsonObject: JSONObject? = null
-                        var errorDto : ErrorResponse? = null
-                        try{
-                            jsonObject = JSONObject(response.errorBody()!!.string())
-                            val errorCode = jsonObject.getInt("errorCode")
-                            val message = jsonObject.getString("message")
-                            errorDto = ErrorResponse(errorCode= errorCode, message)
-                        }
-                        catch (e: JSONException){
-                            e.printStackTrace()
-                        }
-
-                        if (errorDto != null) {
-                            loginView.onLoginFailure(errorDto.errorCode, errorDto.message)
-                        }
-
+                    if (errorDto != null) {
+                        loginView.onLoginFailure(errorDto.errorCode, errorDto.message)
                     }
                 }
-            }
+         }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                 Log.d("온페일러",t.message.toString())
