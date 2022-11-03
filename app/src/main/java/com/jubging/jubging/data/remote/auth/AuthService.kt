@@ -27,27 +27,52 @@ object AuthService {
         authService.signUp(user).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
 
-                if(response.isSuccessful){
-                    val resp = response.body()!!
-                    signUpView.onSignUpSuccess()
-                }
-                else{
-                    var jsonObject: JSONObject? = null
-                    var errorDto : ErrorResponse? = null
-                    try{
-                        jsonObject = JSONObject(response.errorBody()!!.string())
-                        val errorCode = jsonObject.getInt("errorCode")
-                        val message = jsonObject.getString("message")
-                        errorDto = ErrorResponse(errorCode= errorCode, message)
-                    }
-                    catch (e: JSONException){
-                        e.printStackTrace()
+                when(response.code()){
+
+                    201->{
+                        val resp = response.body()!!
+                        signUpView.onSignUpSuccess()
                     }
 
-                    if (errorDto != null) {
-                        signUpView.onSignUpFailure(errorDto.errorCode, errorDto.message)
+                    400->{
+                        var jsonObject: JSONObject? = null
+                        var errorDto : ErrorResponse? = null
+                        try{
+                            jsonObject = JSONObject(response.errorBody()!!.string())
+                            val errorCode = jsonObject.getInt("errorCode")
+                            val message = jsonObject.getString("message")
+                            errorDto = ErrorResponse(errorCode= errorCode, message)
+                        }
+                        catch (e: JSONException){
+                            e.printStackTrace()
+                        }
+
+                        if (errorDto != null) {
+                            signUpView.onSignUpFailure(errorDto.errorCode, errorDto.message)
+                        }
                     }
                 }
+//                if(response.isSuccessful){
+//                    val resp = response.body()!!
+//                    signUpView.onSignUpSuccess()
+//                }
+//                else{
+//                    var jsonObject: JSONObject? = null
+//                    var errorDto : ErrorResponse? = null
+//                    try{
+//                        jsonObject = JSONObject(response.errorBody()!!.string())
+//                        val errorCode = jsonObject.getInt("errorCode")
+//                        val message = jsonObject.getString("message")
+//                        errorDto = ErrorResponse(errorCode= errorCode, message)
+//                    }
+//                    catch (e: JSONException){
+//                        e.printStackTrace()
+//                    }
+//
+//                    if (errorDto != null) {
+//                        signUpView.onSignUpFailure(errorDto.errorCode, errorDto.message)
+//                    }
+//                }
 
             }
 
@@ -68,27 +93,52 @@ object AuthService {
                 Log.d("로그인", user.toString())
                 Log.d("응답", response.errorBody()?.string().toString())
 
-                if(response.isSuccessful){
-                    val resp = response.body()!!
-                    loginView.onLoginSuccess(resp)
-                }
-                else{
-                    var jsonObject: JSONObject? = null
-                    var errorDto : ErrorResponse? = null
-                    try{
-                        jsonObject = JSONObject(response.errorBody()!!.string())
-                        val errorCode = jsonObject.getInt("errorCode")
-                        val message = jsonObject.getString("message")
-                        errorDto = ErrorResponse(errorCode= errorCode, message)
-                    }
-                    catch (e: JSONException){
-                        e.printStackTrace()
+                when(response.code()){
+                    200 -> {
+                        val resp = response.body()!!
+                        loginView.onLoginSuccess(resp)
                     }
 
-                    if (errorDto != null) {
-                        loginView.onLoginFailure(errorDto.errorCode, errorDto.message)
+                    400 -> {
+                        var jsonObject: JSONObject? = null
+                        var errorDto : ErrorResponse? = null
+                        try{
+                            jsonObject = JSONObject(response.errorBody()!!.string())
+                            val errorCode = jsonObject.getInt("errorCode")
+                            val message = jsonObject.getString("message")
+                            errorDto = ErrorResponse(errorCode= errorCode, message)
+                        }
+                        catch (e: JSONException){
+                            e.printStackTrace()
+                        }
+
+                        if (errorDto != null) {
+                            loginView.onLoginFailure(errorDto.errorCode, errorDto.message)
+                        }
                     }
                 }
+
+//                if(response.isSuccessful){
+//                    val resp = response.body()!!
+//                    loginView.onLoginSuccess(resp)
+//                }
+//                else{
+//                    var jsonObject: JSONObject? = null
+//                    var errorDto : ErrorResponse? = null
+//                    try{
+//                        jsonObject = JSONObject(response.errorBody()!!.string())
+//                        val errorCode = jsonObject.getInt("errorCode")
+//                        val message = jsonObject.getString("message")
+//                        errorDto = ErrorResponse(errorCode= errorCode, message)
+//                    }
+//                    catch (e: JSONException){
+//                        e.printStackTrace()
+//                    }
+//
+//                    if (errorDto != null) {
+//                        loginView.onLoginFailure(errorDto.errorCode, errorDto.message)
+//                    }
+//                }
          }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
