@@ -1,31 +1,107 @@
 package com.jubging.jubging.ui.jubging
 
 import android.R
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import androidx.lifecycle.Transformations.map
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.jubging.jubging.databinding.FragmentJubgingBinding
-import com.jubging.jubging.ui.base.BaseFragment
 
 
-class JubgingFragment(): BaseFragment<FragmentJubgingBinding>(FragmentJubgingBinding::inflate), OnMapReadyCallback {
+class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener{
 
-    private var map: GoogleMap? = null
+    lateinit var binding: com.jubging.jubging.databinding.FragmentJubgingBinding
+    private lateinit var mView: MapView
+    private lateinit var mMap: GoogleMap
 
-    override fun initAfterBinding() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentJubgingBinding.inflate(inflater,container,false)
+
+        mView = binding.jubgingMap
+        mView.onCreate(savedInstanceState)
+        mView.getMapAsync(this)
+        return binding.root
+
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
 
+        val markerOptions = MarkerOptions()
+        val cau = LatLng(37.503371,126.957053)
 
+        val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can) as BitmapDrawable
+        val b = bitmapdraw.bitmap
+        val smallMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
+
+        markerOptions.title("중앙대").position(cau).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+
+        mMap.addMarker(markerOptions)
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+
+        mMap.setOnMarkerClickListener(this)
+        mMap.setOnMapClickListener(this)
 
     }
 
-
-    override fun onMapReady(p0: GoogleMap) {
-        map = p0
+    override fun onMarkerClick(p0: Marker): Boolean {
+        binding.jubgingInfoFl.visibility = View.VISIBLE
+        return true
     }
+
+    override fun onMapClick(p0: LatLng) {
+        binding.jubgingInfoFl.visibility = View.GONE
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mView.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mView.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mView.onPause()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mView.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        mView.onDestroy()
+        super.onDestroy()
+    }
+
+
+
+
 }
