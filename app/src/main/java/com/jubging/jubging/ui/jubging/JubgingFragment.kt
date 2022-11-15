@@ -1,7 +1,7 @@
 package com.jubging.jubging.ui.jubging
 
-import android.R
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.jubging.jubging.databinding.FragmentJubgingBinding
 
 
+
 class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener{
 
     lateinit var binding: com.jubging.jubging.databinding.FragmentJubgingBinding
@@ -32,6 +33,13 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentJubgingBinding.inflate(inflater,container,false)
+
+        binding.jubgingPlayCl.setOnClickListener{
+            val intent = Intent(activity, BluetoothActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         mView = binding.jubgingMap
         mView.onCreate(savedInstanceState)

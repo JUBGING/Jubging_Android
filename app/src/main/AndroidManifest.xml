@@ -101,6 +101,12 @@
             android:name=".ui.mypage.MyprofileActivity"
             android:exported="true" />
 
+//블루투스
+        <activity
+            android:name=".ui.jubging.BluetoothActivity"
+            android:exported="true" />
+
+
     </application>
 
 </manifest>
