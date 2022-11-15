@@ -17,7 +17,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
+import com.jubging.jubging.ui.main.MainActivity
 
 
 class BluetoothActivity: AppCompatActivity() {
@@ -97,8 +99,15 @@ class BluetoothActivity: AppCompatActivity() {
 
         mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    }
 
+//        //확인 버튼 누르면 다음 액티비티 뜨도록
+//        binding.bluetoothConfirmTv.setOnClickListener {
+//            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container, JubgingDataFragment())
+//            val intent = Intent(this,MainActivity::class.java)
+//            startActivity(intent)
+//
+//        }
+    }
     // Create a BroadcastReceiver for ACTION_FOUND.
     private val receiver = object : BroadcastReceiver() {
 
