@@ -25,6 +25,7 @@
     <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
 
+
     <application
         android:name=".ApplicationClass"
         android:allowBackup="true"
@@ -39,7 +40,8 @@
         android:usesCleartextTraffic="true"
         >
 
-//구글 api 키
+
+        //구글 api 키
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBmOGGqKZTScEPyWgXpNdlHfdFPilWNNKk"/>
