@@ -23,8 +23,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
 import kotlinx.android.synthetic.main.activity_bluetooth.*
-import java.io.IOException
-import kotlin.reflect.KProperty
 
 
 class BluetoothActivity: AppCompatActivity() {
@@ -145,7 +143,6 @@ class BluetoothActivity: AppCompatActivity() {
         mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
     //블루투스 권한
     private fun hasPermissions(context: Context, permissions: Array<String>): Boolean {
         for (permission in permissions) {

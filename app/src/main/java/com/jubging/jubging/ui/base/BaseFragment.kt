@@ -25,6 +25,7 @@ abstract class BaseFragment<VB : androidx.viewbinding.ViewBinding>(
         return binding.root
     }
 
+
     override fun onStart() {
         super.onStart()
         initAfterBinding()

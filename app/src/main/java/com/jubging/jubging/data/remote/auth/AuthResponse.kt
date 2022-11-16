@@ -2,7 +2,7 @@ package com.mummoom.md.data.remote.auth
 
 import com.google.gson.annotations.SerializedName
 
-//data class Auth (@SerializedName("accessToken") val accessToken: String)
+data class Auth (@SerializedName("accessToken") val accessToken: String)
 
 data class AuthResponse(
     @SerializedName("errorCode") val errorCode: Int,
