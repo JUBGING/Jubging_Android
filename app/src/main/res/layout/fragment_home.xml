@@ -15,7 +15,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        //뒤에 초록 배경
+        <!-- 뒤 초록배경 -->
         <TextView
             android:id="@+id/home_background_green_tv"
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             app:layout_constraintHeight_percent="0.3"
             android:background="@color/main_color"/>
 
-        // 줍깅 로고
+        <!-- 줍깅 배경 -->
         <ImageView
             android:id="@+id/home_logo_iv"
             android:layout_width="40dp"
@@ -111,7 +111,7 @@
                 app:layout_constraintTop_toTopOf="@id/home_picture_cl" />
 
 
-            //새싹
+            <!-- 새싹 -->
 
             <ImageView
                 android:id="@+id/home_plant_small_iv"
@@ -143,7 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            //나뭇가지
+            <!-- 나뭇가지 -->
 
             <ImageView
                 android:id="@+id/home_branch_small_iv"
@@ -175,8 +175,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-
-            //나무
+            <!-- 나무 -->
 
             <ImageView
                 android:id="@+id/home_tree_small_iv"

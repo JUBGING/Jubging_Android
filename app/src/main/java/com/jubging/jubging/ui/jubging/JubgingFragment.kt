@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,11 +36,9 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         binding = FragmentJubgingBinding.inflate(inflater,container,false)
 
         binding.jubgingPlayCl.setOnClickListener{
-            val intent = Intent(activity, BluetoothActivity::class.java)
+            val intent = Intent(activity, BluetoothSplashActivity::class.java)
             startActivity(intent)
         }
-
-
 
         mView = binding.jubgingMap
         mView.onCreate(savedInstanceState)
@@ -60,12 +59,10 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         val smallMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
 
         markerOptions.title("중앙대").position(cau).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-
         mMap.addMarker(markerOptions)
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
         mMap.setOnMarkerClickListener(this)
         mMap.setOnMapClickListener(this)
 
