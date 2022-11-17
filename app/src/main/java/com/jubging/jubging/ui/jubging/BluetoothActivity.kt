@@ -9,8 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Bundle
+import android.os.*
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -21,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
+import com.jubging.jubging.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -28,7 +28,6 @@ import kotlin.collections.ArrayList
 
 class BluetoothActivity: AppCompatActivity() {
     private var mBinding: ActivityBluetoothBinding? = null
-
     // 매번 null 체크를 할 필요 없이 편의성을 위해 바인딩 변수 재 선언
     private val binding get() = mBinding!!
     val PERMISSIONS = arrayOf(
@@ -45,6 +44,15 @@ class BluetoothActivity: AppCompatActivity() {
     private lateinit var broadcastReceiver: BroadcastReceiver
     lateinit var deviceList: ArrayList<String>
     lateinit var adapterList: ArrayAdapter<String>
+    private val handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            var str = msg.data.getString("data")
+            if(str?.get(0)?.equals('-') == true){
+                str = "0.00"
+            }
+            weight.setText(str + "KG")
+        }
+    }
 
     private val activityResultLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -94,6 +102,7 @@ class BluetoothActivity: AppCompatActivity() {
                     if (device.name == "jubjubi") {
                         jubjubiDevice = device
                         //연결
+                        connectDevice(jubjubiDevice!!.address)
                     }
                 }
             }
@@ -113,7 +122,6 @@ class BluetoothActivity: AppCompatActivity() {
                             // 기기 MAC 주소
                             val deviceHardwareAddress = device?.address
                             if (deviceName != null && deviceHardwareAddress != null) {
-                                listView_new.adapter = adapterList
                                 deviceList.add(deviceName)
                                 adapterList.notifyDataSetChanged()
                                 //맥주소로 바꾸자
@@ -154,7 +162,7 @@ class BluetoothActivity: AppCompatActivity() {
             // UUID 선언
             val uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
             try {
-                val thread = ConnectThread(uuid, device)
+                val thread = ConnectThread(uuid, device, handler)
                 thread.run()
                 Log.d("connectDevice", "${device.name}과 연결되었습니다.")
             } catch (e: Exception) { // 연결에 실패할 경우 호출됨

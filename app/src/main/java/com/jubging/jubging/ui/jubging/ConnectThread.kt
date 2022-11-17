@@ -3,7 +3,12 @@ package com.jubging.jubging.ui.jubging
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.text.Layout
 import android.util.Log
+import android.widget.TextView
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
@@ -13,7 +18,7 @@ import java.util.*
 class ConnectThread(
     private val myUUID: UUID,
     private val device: BluetoothDevice,
-
+    private val handler: Handler
 ) : Thread() {
     companion object {
         private const val TAG = "CONNECT_THREAD"
@@ -27,7 +32,6 @@ class ConnectThread(
     private inner class ConnectedThread(private val bluetoothSocket: BluetoothSocket) : Thread() {
         private lateinit var inputStream: InputStream
         private lateinit var outputStream: OutputStream
-
         init {
             try {
                 // BluetoothSocket의 InputStream, OutputStream 초기화
@@ -46,8 +50,17 @@ class ConnectThread(
                 try {
                     // 데이터 받기(읽기)
                     bytes = inputStream.read(buffer)
-                    Log.d(TAG, bytes.toString())
+                    var str: String = ""
+                    for (i in 0..bytes-1){
+                        str += buffer[i].toChar()
+                    }
+                    var msg: Message = Message()
+                    var data = Bundle()
+                    data.putString("data",str)
+                    msg.data = data
+                    handler.handleMessage(msg)
                 } catch (e: Exception) { // 기기와의 연결이 끊기면 호출
+                    e.printStackTrace()
                     Log.d(TAG, "기기와의 연결이 끊겼습니다.")
                     break
                 }
@@ -71,6 +84,7 @@ class ConnectThread(
             }
         }
     }
+
     override fun run() {
         try {
             // 연결 수행
