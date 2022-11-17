@@ -83,13 +83,18 @@ class BluetoothActivity: AppCompatActivity() {
                     Log.d("TEST", "권한 요청")
                     requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             } else {
                 if (!hasPermissions(this, PERMISSIONS)) {
                     Log.d("TEST", "권한요청")
                     requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             }
-
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
         }
