@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/login_info_cl"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="25dp"
         >
 
@@ -49,7 +49,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_logo_cl"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/login_cl_background">
 
         <TextView

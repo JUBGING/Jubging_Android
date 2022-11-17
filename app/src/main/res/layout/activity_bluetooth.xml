@@ -78,6 +78,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="현재 무게 : "
+            android:textColor="@color/black"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/main_bold"
             android:textSize="30sp"
             />
     </LinearLayout>

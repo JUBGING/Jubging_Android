@@ -39,8 +39,6 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
             startActivity(intent)
         }
 
-
-
         mView = binding.jubgingMap
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
@@ -63,8 +61,8 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
 
         mMap.addMarker(markerOptions)
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
 
         mMap.setOnMarkerClickListener(this)
         mMap.setOnMapClickListener(this)
