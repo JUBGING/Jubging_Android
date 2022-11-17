@@ -43,14 +43,15 @@ class BluetoothActivity: AppCompatActivity() {
 
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private lateinit var broadcastReceiver: BroadcastReceiver
-    lateinit var deviceList: ArrayList<String>
-    lateinit var adapterList: ArrayAdapter<String>
+
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             var str = msg.data.getString("data")
             if(str?.get(0)?.equals('-') == true){
                 str = "0.00"
             }
+            Log.d("test", str.toString())
+            Log.d("TEST", this.looper.toString())
             weight.setText(str + "KG")
         }
     }
@@ -83,13 +84,18 @@ class BluetoothActivity: AppCompatActivity() {
                     Log.d("TEST", "권한 요청")
                     requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             } else {
                 if (!hasPermissions(this, PERMISSIONS)) {
                     Log.d("TEST", "권한요청")
                     requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             }
-
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
         }
@@ -97,7 +103,7 @@ class BluetoothActivity: AppCompatActivity() {
         //확인 버튼 누르면 다음 액티비티 뜨도록
 
         binding.bluetoothConfirmTv.setOnClickListener {
-            val intent = Intent(this, JubgingDataActivity::class.java)
+            val intent = Intent(this, FinishJubgingActivity::class.java)
             startActivity(intent)
         }
     }
@@ -131,8 +137,7 @@ class BluetoothActivity: AppCompatActivity() {
                         // 기기 MAC 주소
                         val deviceHardwareAddress = device?.address
                         if (deviceName != null && deviceHardwareAddress != null) {
-                            deviceList.add(deviceName)
-                            adapterList.notifyDataSetChanged()
+
                             //맥주소로 바꾸자
                             if (deviceName == "jubjubi") {
                                 jubjubiDevice = device

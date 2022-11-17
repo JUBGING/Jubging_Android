@@ -101,6 +101,10 @@
             android:name=".ui.jubging.JubgingDataActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".ui.jubging.JipgaeNumActivity"
+            android:exported="true" />
+
 //마이페이지
         <activity
             android:name=".ui.mypage.ChangePwdActivity"

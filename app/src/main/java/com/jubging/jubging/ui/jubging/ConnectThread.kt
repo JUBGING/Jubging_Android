@@ -43,6 +43,8 @@ class ConnectThread(
         }
 
         override fun run() {
+            Log.d(TAG, this.name)
+
             val buffer = ByteArray(1024)
             var bytes: Int
 
@@ -59,6 +61,7 @@ class ConnectThread(
                     data.putString("data",str)
                     msg.data = data
                     handler.handleMessage(msg)
+                    Log.d(TAG,this.name + "에서보잼")
                 } catch (e: Exception) { // 기기와의 연결이 끊기면 호출
                     e.printStackTrace()
                     Log.d(TAG, "기기와의 연결이 끊겼습니다.")
