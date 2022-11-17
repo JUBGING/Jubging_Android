@@ -226,7 +226,7 @@
             android:background="@drawable/login_text_rounded_rectangle"
             android:gravity="center"
             android:text="회원가입 하기"
-            android:fontFamily="@font/regular"
+            android:fontFamily="@font/main_bold"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"

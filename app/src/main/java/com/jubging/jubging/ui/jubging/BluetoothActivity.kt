@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
 import com.jubging.jubging.ui.main.MainActivity
@@ -29,6 +30,8 @@ class BluetoothActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         //블루투스 어댑터 가져오기
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         //블루투스 지원하지 않는 기기인 경우
@@ -100,13 +103,26 @@ class BluetoothActivity: AppCompatActivity() {
         mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        //확인 버튼 누르면 다음 액티비티 뜨도록
-//        binding.bluetoothConfirmTv.setOnClickListener {
-//            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container, JubgingDataFragment())
-//            val intent = Intent(this,MainActivity::class.java)
+        //확인 버튼 누르면 다음 액티비티 뜨도록
+
+        binding.bluetoothConfirmTv.setOnClickListener {
+            val intent = Intent(this, JubgingDataActivity::class.java)
+            startActivity(intent)
+        }
+//        mBinding.bluetoothConfirmTv.setOnClickListener {
+//
+//            val intent = Intent(this,JubgingDataActivity::class.java)
 //            startActivity(intent)
+//            intent.putExtra("index",1)
+//            MainActivity().changeFragment(1)
+//            finish()
+//            supportFragmentManager.beginTransaction().replace(R.id.jubgingFragment,JubgingDataFragment()).commit()
+//        val intent = Intent(requireContext(),JubgingDataFragment::class.java)
+//        startActivity(intent)
 //
 //        }
+
+
     }
     // Create a BroadcastReceiver for ACTION_FOUND.
     private val receiver = object : BroadcastReceiver() {

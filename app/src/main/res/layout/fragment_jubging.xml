@@ -32,7 +32,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:background="@drawable/round_rectangle_solid_green"
-
+        android:visibility="gone"
         >
 
         <TextView

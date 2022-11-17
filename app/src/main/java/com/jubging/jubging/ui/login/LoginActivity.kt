@@ -17,6 +17,7 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
     override fun initAfterBinding() {
         binding.loginLoginTv.setOnClickListener(this)
         binding.loginSingUpTv.setOnClickListener(this)
+        binding.loginSignUpView.setOnClickListener(this)
 
     }
 
@@ -26,6 +27,7 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
 
         when(v){
             binding.loginSingUpTv -> startNextActivity(SignUpActivity::class.java)
+            binding.loginSignUpView -> startNextActivity(SignUpActivity::class.java)
             binding.loginLoginTv -> login()
         }
 

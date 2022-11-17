@@ -10,6 +10,7 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     override fun initAfterBinding() {
 
+
     }
 
     override fun onStart() {
@@ -31,6 +32,7 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
         binding.homeKcalDataTv.text = userInfoResponse.calorieSum.toString()
         binding.homePointDataTv.text = userInfoResponse.totalPoints.toString()
         binding.homeUserNameDataTv.text = userInfoResponse.name
+
     }
 
     override fun onGetUserInfoLoading() {

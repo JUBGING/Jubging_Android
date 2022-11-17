@@ -4,50 +4,86 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/jipgae_jipgae_iv"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="60dp"
-        android:src="@drawable/jipgae"
-        android:scaleY="-1" />
-
-    <ImageView
-        android:id="@+id/jipgae_arrow_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/jipgae_jipgae_iv"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/back_red"
-        android:scaleX="-1" />
-
-    <ImageView
-        android:id="@+id/jipgae_trash_can_iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/jipgae_arrow_iv"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/trash_can" />
-
-    <TextView
-        android:id="@+id/jipgae_notice_tv"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/jipgae_image_cl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/jipgae_trash_can_iv"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
-        android:text="집게를 반납해주세요!"
-        android:textColor="@color/black"
-        android:fontFamily="@font/main_bold"
-        android:textSize="25dp" />
+        app:layout_constraintBottom_toTopOf="@id/jipgae_text_ll"
+        android:layout_marginTop="60dp">
+
+        <ImageView
+            android:id="@+id/jipgae_jipgae_iv"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="60dp"
+            android:src="@drawable/jipgae"
+            android:scaleY="-1" />
+
+        <ImageView
+            android:id="@+id/jipgae_arrow_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/jipgae_jipgae_iv"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/back_red"
+            android:scaleX="-1" />
+
+        <ImageView
+            android:id="@+id/jipgae_trash_can_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/jipgae_arrow_iv"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/trash_can" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/jipgae_text_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/jipgae_image_cl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/jipgae_image_cl"
+        app:layout_constraintEnd_toEndOf="@id/jipgae_image_cl"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/jipgae_notice_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="집게를 반납해주세요!"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_bold"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/jipgae_confirm_tv"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="확인"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/main_bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/login_text_rounded_rectangle"
+            android:layout_marginTop="30dp"/>
+
+    </LinearLayout>
+
 
 
 
