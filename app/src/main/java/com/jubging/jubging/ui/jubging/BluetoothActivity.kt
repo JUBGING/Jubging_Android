@@ -90,60 +90,6 @@ class BluetoothActivity: AppCompatActivity() {
                 }
             }
 
-            if (bluetoothAdapter?.isEnabled == false) {
-                Log.d("TEST", "블루투스 꺼져있음")
-                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                activityResultLauncher.launch(intent)
-            }
-
-            val pairedDevices: Set<BluetoothDevice> =
-                bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
-            var jubjubiDevice: BluetoothDevice? = null
-
-            if (!pairedDevices.isEmpty()) {
-                pairedDevices.forEach { device ->
-                    if (device.name == "jubjubi") {
-                        jubjubiDevice = device
-                        //연결
-                        connectDevice(jubjubiDevice!!.address)
-                    }
-                }
-            }
-
-            Log.d("TEST", "검색 ㄱㄱ")
-            // 블루투스 기기 검색 브로드캐스트
-            broadcastReceiver = object : BroadcastReceiver() {
-                override fun onReceive(c: Context?, intent: Intent?) {
-                    Log.d("TEST", "찾음")
-                    when (intent?.action) {
-                        BluetoothDevice.ACTION_FOUND -> {
-                            // BluetoothDevice 객체 획득
-                            val device =
-                                intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                            // 기기 이름
-                            val deviceName = device?.name
-                            // 기기 MAC 주소
-                            val deviceHardwareAddress = device?.address
-                            if (deviceName != null && deviceHardwareAddress != null) {
-                                deviceList.add(deviceName)
-                                adapterList.notifyDataSetChanged()
-                                //맥주소로 바꾸자
-                                if (deviceName == "jubjubi") {
-                                    jubjubiDevice = device
-                                    //연결
-                                    connectDevice(jubjubiDevice!!.address)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
-
-            if (jubjubiDevice == null) {
-                findDevice()
-            }
-
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
         }
@@ -153,6 +99,55 @@ class BluetoothActivity: AppCompatActivity() {
         binding.bluetoothConfirmTv.setOnClickListener {
             val intent = Intent(this, JubgingDataActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun jubjubiConnect(){
+        val pairedDevices: Set<BluetoothDevice> =
+            bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
+        var jubjubiDevice: BluetoothDevice? = null
+
+        if (!pairedDevices.isEmpty()) {
+            pairedDevices.forEach { device ->
+                if (device.name == "jubjubi") {
+                    jubjubiDevice = device
+                    //연결
+                    connectDevice(jubjubiDevice!!.address)
+                }
+            }
+        }
+
+        // 블루투스 기기 검색 브로드캐스트
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(c: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    BluetoothDevice.ACTION_FOUND -> {
+                        // BluetoothDevice 객체 획득
+                        val device =
+                            intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                        // 기기 이름
+                        val deviceName = device?.name
+                        // 기기 MAC 주소
+                        val deviceHardwareAddress = device?.address
+                        if (deviceName != null && deviceHardwareAddress != null) {
+                            deviceList.add(deviceName)
+                            adapterList.notifyDataSetChanged()
+                            //맥주소로 바꾸자
+                            if (deviceName == "jubjubi") {
+                                jubjubiDevice = device
+                                //연결
+                                connectDevice(jubjubiDevice!!.address)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
+
+        if (jubjubiDevice == null) {
+            findDevice()
         }
     }
 
@@ -261,6 +256,7 @@ class BluetoothActivity: AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permissions granted!", Toast.LENGTH_SHORT).show()
+                    jubjubiConnect()
                 } else {
                     requestPermissions(permissions, REQUEST_ALL_PERMISSION)
                     Toast.makeText(this, "Permissions must be granted", Toast.LENGTH_SHORT).show()
