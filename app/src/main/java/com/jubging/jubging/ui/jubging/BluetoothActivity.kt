@@ -141,8 +141,6 @@ class BluetoothActivity: AppCompatActivity() {
             registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
 
             if (jubjubiDevice == null) {
-                deviceList = ArrayList()
-                adapterList = ArrayAdapter(this, R.layout.item, deviceList)
                 findDevice()
             }
 
