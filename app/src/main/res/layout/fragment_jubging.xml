@@ -129,7 +129,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/jubging_new_fl"
+        android:id="@+id/jubging_refresh_fl"
         android:layout_width="65dp"
         android:layout_height="65dp"
         app:layout_constraintTop_toTopOf="parent"

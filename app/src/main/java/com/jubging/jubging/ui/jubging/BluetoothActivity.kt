@@ -45,14 +45,15 @@ class BluetoothActivity: AppCompatActivity() {
 
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private lateinit var broadcastReceiver: BroadcastReceiver
-    lateinit var deviceList: ArrayList<String>
-    lateinit var adapterList: ArrayAdapter<String>
+
     private val handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             var str = msg.data.getString("data")
             if(str?.get(0)?.equals('-') == true){
                 str = "0.00"
             }
+            Log.d("test", str.toString())
+            Log.d("TEST", this.looper.toString())
             weight.setText(str + "KG")
         }
     }
@@ -80,12 +81,20 @@ class BluetoothActivity: AppCompatActivity() {
                 if (!hasPermissions(this, PERMISSIONS_S_ABOVE)) {
                     requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             } else {
                 if (!hasPermissions(this, PERMISSIONS)) {
                     requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
                 }
+                else {
+                    jubjubiConnect();
+                }
             }
-
+            mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+        }
             if (bluetoothAdapter?.isEnabled == false) {
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 activityResultLauncher.launch(intent)
@@ -93,13 +102,59 @@ class BluetoothActivity: AppCompatActivity() {
 
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
-        }
-
         //확인 버튼 누르면 다음 액티비티 뜨도록
 
         binding.bluetoothConfirmTv.setOnClickListener {
-            val intent = Intent(this, JubgingDataActivity::class.java)
+            val intent = Intent(this, FinishJubgingActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun jubjubiConnect(){
+        val pairedDevices: Set<BluetoothDevice> =
+            bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
+        var jubjubiDevice: BluetoothDevice? = null
+
+        if (!pairedDevices.isEmpty()) {
+            pairedDevices.forEach { device ->
+                if (device.name == "jubjubi") {
+                    jubjubiDevice = device
+                    //연결
+                    connectDevice(jubjubiDevice!!.address)
+                }
+            }
+        }
+
+        // 블루투스 기기 검색 브로드캐스트
+        broadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(c: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    BluetoothDevice.ACTION_FOUND -> {
+                        // BluetoothDevice 객체 획득
+                        val device =
+                            intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                        // 기기 이름
+                        val deviceName = device?.name
+                        // 기기 MAC 주소
+                        val deviceHardwareAddress = device?.address
+                        if (deviceName != null && deviceHardwareAddress != null) {
+
+                            //맥주소로 바꾸자
+                            if (deviceName == "jubjubi") {
+                                jubjubiDevice = device
+                                //연결
+                                connectDevice(jubjubiDevice!!.address)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
+
+        if (jubjubiDevice == null) {
+            findDevice()
         }
     }
 
@@ -191,55 +246,6 @@ class BluetoothActivity: AppCompatActivity() {
             }
         }
     }
-
-    @SuppressLint("MissingPermission")
-    private fun jubjubiConnect(){
-        val pairedDevices: Set<BluetoothDevice> =
-            bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
-        var jubjubiDevice: BluetoothDevice? = null
-
-        if (!pairedDevices.isEmpty()) {
-            pairedDevices.forEach { device ->
-                if (device.name == "jubjubi") {
-                    jubjubiDevice = device
-                    //연결
-                    connectDevice(jubjubiDevice!!.address)
-                }
-            }
-        }
-
-        // 블루투스 기기 검색 브로드캐스트
-        broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(c: Context?, intent: Intent?) {
-                when (intent?.action) {
-                    BluetoothDevice.ACTION_FOUND -> {
-                        // BluetoothDevice 객체 획득
-                        val device =
-                            intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                        // 기기 이름
-                        val deviceName = device?.name
-                        // 기기 MAC 주소
-                        val deviceHardwareAddress = device?.address
-                        if (deviceName != null && deviceHardwareAddress != null) {
-                            deviceList.add(deviceName)
-                            adapterList.notifyDataSetChanged()
-                            //맥주소로 바꾸자
-                            if (deviceName == "jubjubi") {
-                                jubjubiDevice = device
-                                //연결
-                                connectDevice(jubjubiDevice!!.address)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
-
-        if (jubjubiDevice == null) {
-            findDevice()
-        }
-    }
     //권한요청 콜백
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
@@ -252,6 +258,7 @@ class BluetoothActivity: AppCompatActivity() {
             REQUEST_ALL_PERMISSION -> {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permissions granted!", Toast.LENGTH_SHORT).show()
                     jubjubiConnect()
                 } else {
                     requestPermissions(permissions, REQUEST_ALL_PERMISSION)
@@ -264,7 +271,6 @@ class BluetoothActivity: AppCompatActivity() {
     // 액티비티가 파괴될 때..
     override fun onDestroy() {
         unregisterReceiver(broadcastReceiver)
-
         // onDestroy 에서 binding class 인스턴스 참조를 정리해주어야 한다.
         mBinding = null
         super.onDestroy()

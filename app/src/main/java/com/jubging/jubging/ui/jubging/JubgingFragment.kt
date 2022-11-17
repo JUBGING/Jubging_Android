@@ -36,7 +36,7 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         binding = FragmentJubgingBinding.inflate(inflater,container,false)
 
         binding.jubgingPlayCl.setOnClickListener{
-            val intent = Intent(activity, BluetoothActivity::class.java)
+            val intent = Intent(activity, JipgaeNumActivity::class.java)
             startActivity(intent)
         }
 

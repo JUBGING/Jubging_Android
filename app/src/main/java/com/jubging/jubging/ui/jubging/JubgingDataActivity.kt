@@ -50,8 +50,9 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
         val marker = LatLng(37.503371,126.957053)
 //        mMap.addMarker(MarkerOptions().position(marker).title("마커 제목"))
 //
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
+
     }
 
 

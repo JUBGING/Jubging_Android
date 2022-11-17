@@ -44,8 +44,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jubging"
+<<<<<<< HEAD
         android:usesCleartextTraffic="true">
 
+=======
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        tools:ignore="ExtraText">
+
+
+//구글 api 키
+>>>>>>> ad6603dd9e551ef68841ec304ee972cc3f371bdb
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBmOGGqKZTScEPyWgXpNdlHfdFPilWNNKk" />
@@ -87,6 +96,15 @@
         <activity
             android:name=".ui.jubging.JubgingDataActivity"
             android:exported="true" />
+<<<<<<< HEAD
+=======
+
+        <activity
+            android:name=".ui.jubging.JipgaeNumActivity"
+            android:exported="true" />
+
+//마이페이지
+>>>>>>> ad6603dd9e551ef68841ec304ee972cc3f371bdb
         <activity
             android:name=".ui.mypage.ChangePwdActivity"
             android:exported="true" />

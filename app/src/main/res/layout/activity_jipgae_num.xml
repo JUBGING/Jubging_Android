@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/jipgae_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="집게 번호를 입력해주세요"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_bold"
+            />
+
+        <LinearLayout
+            android:id="@+id/jipgae_num_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bluetooth_tv"
+            app:layout_constraintStart_toStartOf="@id/bluetooth_tv"
+            app:layout_constraintEnd_toEndOf="@id/bluetooth_tv"
+            android:orientation="horizontal"
+            >
+
+
+            <EditText
+                android:id="@+id/jipgae_num_et"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/bluetooth_tv"
+                app:layout_constraintStart_toStartOf="@id/bluetooth_tv"
+                android:maxLines="1"
+                android:backgroundTint="@color/black"
+                android:textColorHint="@color/black"
+                android:fontFamily="@font/main_bold"
+                android:textSize="23sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/jipgae_num_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="번"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_bold"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/jipgae_num_confirm_tv"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="확인"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/main_bold"
+            android:gravity="center"
+            android:background="@drawable/login_text_rounded_rectangle"
+            android:layout_marginTop="30dp"/>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
