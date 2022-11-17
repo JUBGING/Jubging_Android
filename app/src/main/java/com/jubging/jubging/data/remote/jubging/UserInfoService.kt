@@ -30,7 +30,7 @@ class UserInfoService {
 
                 if(response.code() == 200){
                     val resp = response.body()!!
-                    getUserInfoView.onGetUserInfoSuccess(resp)
+;                    getUserInfoView.onGetUserInfoSuccess(resp)
                 }
                 else{
                     var jsonObject: JSONObject? = null
