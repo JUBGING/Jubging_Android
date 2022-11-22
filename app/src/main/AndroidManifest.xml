@@ -26,12 +26,12 @@
            devices.
     -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- bibo01 : hardware option -->
+    <!-- 카메라 권한-->
+    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
+
     <uses-feature
         android:name="android.hardware.bluetooth"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.bluetooth_le"
-        android:required="false" />
+        android:required="true" />
 
     <application
         android:name=".ApplicationClass"
@@ -44,17 +44,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jubging"
-<<<<<<< HEAD
         android:usesCleartextTraffic="true">
 
-=======
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        tools:ignore="ExtraText">
-
-
-//구글 api 키
->>>>>>> ad6603dd9e551ef68841ec304ee972cc3f371bdb
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBmOGGqKZTScEPyWgXpNdlHfdFPilWNNKk" />
@@ -64,14 +55,12 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true" />
@@ -96,15 +85,9 @@
         <activity
             android:name=".ui.jubging.JubgingDataActivity"
             android:exported="true" />
-<<<<<<< HEAD
-=======
-
         <activity
             android:name=".ui.jubging.JipgaeNumActivity"
             android:exported="true" />
-
-//마이페이지
->>>>>>> ad6603dd9e551ef68841ec304ee972cc3f371bdb
         <activity
             android:name=".ui.mypage.ChangePwdActivity"
             android:exported="true" />
@@ -114,6 +97,21 @@
         <activity
             android:name=".ui.jubging.BluetoothActivity"
             android:exported="true" />
-    </application>
+        <activity
+            android:name=".ui.jubging.CameraActivity"
+            android:exported="true">
+        </activity>
+        
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
 
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                />
+        </provider>
+    </application>
 </manifest>

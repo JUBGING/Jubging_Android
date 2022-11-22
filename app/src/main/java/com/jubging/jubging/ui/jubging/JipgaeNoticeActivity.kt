@@ -8,7 +8,7 @@ class JipgaeNoticeActivity :BaseActivity<ActivityJipgaeNoticeBinding>(ActivityJi
     override fun initAfterBinding() {
 
         binding.jipgaeConfirmTv.setOnClickListener {
-            val intent = Intent(this, TrashNoticeActivity::class.java)
+            val intent = Intent(this, CameraActivity::class.java)
             startActivity(intent)
         }
     }
