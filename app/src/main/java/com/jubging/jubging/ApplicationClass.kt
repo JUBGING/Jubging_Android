@@ -21,7 +21,10 @@ class ApplicationClass : Application() {
 
         lateinit var mSharedPreferences: SharedPreferences
         lateinit var retrofit: Retrofit
+
+        var photo_uri: String = ""
     }
+
 
     override fun onCreate() {
         super.onCreate()
@@ -43,4 +46,6 @@ class ApplicationClass : Application() {
         //MODE_PRIVATE => 생성한 application에서만 사용 가능 -> 자기 앱에서만 접근 가능하다
         mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
     }
+
+
 }

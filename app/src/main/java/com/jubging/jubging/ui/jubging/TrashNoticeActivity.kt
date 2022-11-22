@@ -1,6 +1,7 @@
 package com.jubging.jubging.ui.jubging
 
 import android.content.Intent
+import android.util.Log
 import com.jubging.jubging.databinding.ActivityTrashNoticeBinding
 import com.jubging.jubging.ui.base.BaseActivity
 
@@ -8,7 +9,9 @@ class TrashNoticeActivity:BaseActivity<ActivityTrashNoticeBinding>(ActivityTrash
     override fun initAfterBinding() {
         binding.trashNoticeBtnTv.setOnClickListener {
             val intent = Intent(this, BluetoothActivity::class.java)
+            this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
             startActivity(intent)
+
         }
 
     }

@@ -106,6 +106,7 @@ class BluetoothActivity: AppCompatActivity() {
 
         binding.bluetoothConfirmTv.setOnClickListener {
             val intent = Intent(this, FinishJubgingActivity::class.java)
+            this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
             startActivity(intent)
         }
     }

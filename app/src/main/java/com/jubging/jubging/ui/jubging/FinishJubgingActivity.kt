@@ -16,6 +16,7 @@ class FinishJubgingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_finish_jubging)
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, ShareActivity::class.java)
+            this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
             startActivity(intent)
             finish()
         }, 1500)
