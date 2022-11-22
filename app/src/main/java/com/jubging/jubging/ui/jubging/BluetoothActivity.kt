@@ -11,20 +11,15 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
-import com.jubging.jubging.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class BluetoothActivity: AppCompatActivity() {
