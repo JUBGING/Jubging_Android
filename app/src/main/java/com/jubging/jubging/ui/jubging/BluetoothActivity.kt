@@ -11,20 +11,15 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
-import com.jubging.jubging.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class BluetoothActivity: AppCompatActivity() {
@@ -32,8 +27,10 @@ class BluetoothActivity: AppCompatActivity() {
     // 매번 null 체크를 할 필요 없이 편의성을 위해 바인딩 변수 재 선언
     private val binding get() = mBinding!!
     val PERMISSIONS = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.BLUETOOTH_CONNECT,
+
+        )
     val PERMISSIONS_S_ABOVE = arrayOf(
         Manifest.permission.BLUETOOTH_SCAN,
         Manifest.permission.BLUETOOTH_CONNECT,
@@ -58,12 +55,9 @@ class BluetoothActivity: AppCompatActivity() {
 
     private val activityResultLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            Log.d("TEST", "블투 켜기 요청")
             if (it.resultCode == RESULT_OK) {
-                Log.d("TEST", "활성화")
                 Toast.makeText(applicationContext, "활성화", Toast.LENGTH_SHORT).show()
             } else if (it.resultCode == RESULT_CANCELED) {
-                Log.d("TEST", "비활성화")
                 Toast.makeText(applicationContext, "비활성화", Toast.LENGTH_SHORT).show()
             }
         }
@@ -72,16 +66,14 @@ class BluetoothActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         //블루투스 어댑터 가져오기
         //블루투스 지원하지 않는 기기인 경우
         if (bluetoothAdapter == null) {
+
         }
         else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                Log.d("TEST", "안드로이드 12")
                 if (!hasPermissions(this, PERMISSIONS_S_ABOVE)) {
-                    Log.d("TEST", "권한 요청")
                     requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
                 }
                 else {
@@ -89,7 +81,6 @@ class BluetoothActivity: AppCompatActivity() {
                 }
             } else {
                 if (!hasPermissions(this, PERMISSIONS)) {
-                    Log.d("TEST", "권한요청")
                     requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
                 }
                 else {
@@ -99,11 +90,18 @@ class BluetoothActivity: AppCompatActivity() {
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
         }
+            if (bluetoothAdapter?.isEnabled == false) {
+                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                activityResultLauncher.launch(intent)
+            }
 
+            mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
+            setContentView(binding.root)
         //확인 버튼 누르면 다음 액티비티 뜨도록
 
         binding.bluetoothConfirmTv.setOnClickListener {
             val intent = Intent(this, FinishJubgingActivity::class.java)
+            this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
             startActivity(intent)
         }
     }
@@ -172,9 +170,7 @@ class BluetoothActivity: AppCompatActivity() {
             try {
                 val thread = ConnectThread(uuid, device, handler)
                 thread.run()
-                Log.d("connectDevice", "${device.name}과 연결되었습니다.")
             } catch (e: Exception) { // 연결에 실패할 경우 호출됨
-                Log.d("connectDevice", "기기의 전원이 꺼져 있습니다. 기기를 확인해주세요.")
                 return
             }
         }
@@ -219,7 +215,6 @@ class BluetoothActivity: AppCompatActivity() {
                 return
             }
             bluetoothAdapter.startDiscovery()
-            Log.d("TEST", "블루투스 검색 시작")
         } else{
             Toast.makeText(applicationContext, "블루투스를 켜주세요", Toast.LENGTH_SHORT).show()
         }
@@ -247,7 +242,6 @@ class BluetoothActivity: AppCompatActivity() {
             }
         }
     }
-
     //권한요청 콜백
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
@@ -273,7 +267,6 @@ class BluetoothActivity: AppCompatActivity() {
     // 액티비티가 파괴될 때..
     override fun onDestroy() {
         unregisterReceiver(broadcastReceiver)
-
         // onDestroy 에서 binding class 인스턴스 참조를 정리해주어야 한다.
         mBinding = null
         super.onDestroy()
