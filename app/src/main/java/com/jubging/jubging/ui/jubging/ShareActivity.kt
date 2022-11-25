@@ -1,9 +1,11 @@
 package com.jubging.jubging.ui.jubging
 
+import android.app.Activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,11 +15,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.jubging.jubging.ApplicationClass
 import com.jubging.jubging.databinding.ActivityShareBinding
 import com.jubging.jubging.ui.banner.Banner2Fragment
 import com.jubging.jubging.ui.banner.BannerFragment
@@ -65,8 +70,16 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         binding.shareShareIv.setOnClickListener{
             instaShareBtn()
         }
+        val dir = this.intent.getStringExtra("URI")
+        val file = File(dir)
+        Glide.with(this).load(file).into(binding.shareImgIv)
+    }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        val dir = externalCacheDir.toString() + "/photo.jpg"
+        val file = File(dir)
+        file.delete()
     }
 
     private fun instaShareBtn() {
