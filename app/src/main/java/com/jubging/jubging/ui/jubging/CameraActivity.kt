@@ -17,7 +17,7 @@ import java.io.File
 import java.util.*
 
 private const val REQUEST_CODE_FOR_IMAGE_CAPTURE = 100
-private const val TAG = "CameraActivity"
+const val TAG = "CameraActivity"
 
 
 class CameraActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class CameraActivity : AppCompatActivity() {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
             startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
             photoFile = newFile
-            binding.confirm.setOnClickListener() {
+            binding.cameraConfirmTv.setOnClickListener() {
                 val nextIntent = Intent(this, TrashNoticeActivity::class.java)
                 nextIntent.putExtra("URI", newFile.path)
                 startActivity(nextIntent)
@@ -54,7 +54,7 @@ class CameraActivity : AppCompatActivity() {
         when(requestCode){
             REQUEST_CODE_FOR_IMAGE_CAPTURE -> {
                 if(resultCode == RESULT_OK){
-                    Glide.with(this).load(photoFile).into(binding.image)
+                    Glide.with(this).load(photoFile).into(binding.cameraImageIv)
                 } else{
                     Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
                     finish()
