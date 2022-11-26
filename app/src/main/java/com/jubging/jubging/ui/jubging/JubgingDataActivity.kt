@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -18,6 +20,7 @@ import com.jubging.jubging.databinding.ActivityJubgingDataBinding
 class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
     private lateinit var binding: ActivityJubgingDataBinding
     private lateinit var mMap: GoogleMap
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,8 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
         }
 
     }
+
+
 
     override fun onStart() {
         super.onStart()

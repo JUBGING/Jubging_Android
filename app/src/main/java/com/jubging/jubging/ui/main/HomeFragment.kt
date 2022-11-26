@@ -1,5 +1,7 @@
 package com.jubging.jubging.ui.main
 
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.jubging.jubging.data.remote.jubging.UserInfoService
 import com.jubging.jubging.databinding.FragmentHomeBinding
@@ -13,11 +15,18 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         getUserResponse()
     }
+
+
+//    override fun onStart() {
+//        super.onStart()
+//
+//        getUserResponse()
+//    }
 
     private fun getUserResponse(){
         val myUserInfoService = UserInfoService()
