@@ -39,7 +39,7 @@ class CameraActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
             photoFile = newFile
             binding.cameraConfirmTv.setOnClickListener() {
-                val nextIntent = Intent(this, TrashNoticeActivity::class.java)
+                val nextIntent = Intent(this, BluetoothActivity::class.java)
                 nextIntent.putExtra("URI", newFile.path)
                 startActivity(nextIntent)
             }
