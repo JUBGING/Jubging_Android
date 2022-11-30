@@ -54,7 +54,8 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
-
+        this.intent.getStringExtra("WEIGHT")?.let { Log.d("SHARE", it) }
+        binding.shareWeightDataTv.text = this.intent.getStringExtra("WEIGHT")
         //다운로드 버튼 클릭시
         binding.shareDownloadBtnIv.setOnClickListener{
             imgSaveOnClick()
