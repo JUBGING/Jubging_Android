@@ -2,6 +2,7 @@ package com.jubging.jubging.ui.jubging
 
 import android.app.Activity
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.ContentValues
 import android.content.Context
@@ -53,7 +54,8 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
-
+        this.intent.getStringExtra("WEIGHT")?.let { Log.d("SHARE", it) }
+        binding.shareWeightDataTv.text = this.intent.getStringExtra("WEIGHT")
         //다운로드 버튼 클릭시
         binding.shareDownloadBtnIv.setOnClickListener{
             imgSaveOnClick()
@@ -161,7 +163,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         val backgroundHeight = resources.displayMetrics.heightPixels
         val backgroundBitmap = Bitmap.createBitmap(backgroundWidth, backgroundHeight, Bitmap.Config.ARGB_8888) // 비트맵 생성
         val canvas = Canvas(backgroundBitmap) // 캔버스에 비트맵을 Mapping.
-        canvas.drawColor(Color.WHITE) // 캔버스에 현재 설정된 배경화면색으로 칠한다.
+        canvas.drawColor(Color.TRANSPARENT) // 캔버스에 현재 설정된 배경화면색으로 칠한다.
 
         return backgroundBitmap
     }
@@ -270,6 +272,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
     }
 
     //Android Q (Android 10, API 29 이상에서는 이 메서드를 통해서 이미지를 저장한다.)
+    @SuppressLint("Recycle")
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun saveImageOnAboveAndroidQ(bitmap: Bitmap) : Uri? {
         val fileName = System.currentTimeMillis().toString() + ".png" // 파일이름 현재시간.png

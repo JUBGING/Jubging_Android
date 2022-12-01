@@ -31,7 +31,7 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(packageManager) != null){
+        if (intent.resolveActivity(packageManager) != null) {
             val dir = externalCacheDir
             val newFile: File = File.createTempFile("photo_", ".jpg", dir)
             val uri = FileProvider.getUriForFile(this, "$packageName.provider", newFile)
@@ -39,10 +39,9 @@ class CameraActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
             photoFile = newFile
             binding.cameraConfirmTv.setOnClickListener() {
-                val nextIntent = Intent(this, TrashNoticeActivity::class.java)
+                val nextIntent = Intent(this, BluetoothActivity::class.java)
                 nextIntent.putExtra("URI", newFile.path)
                 startActivity(nextIntent)
-                finish()
             }
         }
 
@@ -51,7 +50,7 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
+        when (requestCode) {
             REQUEST_CODE_FOR_IMAGE_CAPTURE -> {
                 if(resultCode == RESULT_OK){
                     Glide.with(this).load(photoFile).into(binding.cameraImageIv)

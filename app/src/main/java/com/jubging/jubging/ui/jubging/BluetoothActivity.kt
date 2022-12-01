@@ -2,6 +2,7 @@ package com.jubging.jubging.ui.jubging
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
@@ -17,8 +18,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.jubging.jubging.ApplicationClass.Companion.bluetoothThread
+import com.jubging.jubging.ApplicationClass.Companion.handlerd
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
 import kotlinx.android.synthetic.main.activity_bluetooth.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -41,7 +46,7 @@ class BluetoothActivity: AppCompatActivity() {
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private lateinit var broadcastReceiver: BroadcastReceiver
 
-    private val handler = object : Handler(Looper.getMainLooper()) {
+    private var handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             var str = msg.data.getString("data")
             if(str?.get(0)?.equals('-') == true){
@@ -49,7 +54,7 @@ class BluetoothActivity: AppCompatActivity() {
             }
             Log.d("test", str.toString())
             Log.d("TEST", this.looper.toString())
-            weight.setText(str + "KG")
+            weight.setText(str + " KG")
         }
     }
 
@@ -66,8 +71,62 @@ class BluetoothActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        handlerd = handler
+        if (bluetoothAdapter == null) {
+
+        }
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (!hasPermissions(this, PERMISSIONS_S_ABOVE)) {
+                    requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
+                }
+            } else {
+                if (!hasPermissions(this, PERMISSIONS)) {
+                    requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
+                }
+            }
+        }
+        if(((Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) && hasPermissions(this,PERMISSIONS_S_ABOVE)) || ((Build.VERSION.SDK_INT < Build.VERSION_CODES.S)&&hasPermissions(this,PERMISSIONS))){
+            val context: Context = this
+            var result:Boolean = false
+            val dialog = ProgressDialog(this@BluetoothActivity)
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+            dialog.setMessage("줍줍이 찾는중...")
+            dialog.show()
+
+            GlobalScope.launch {
+                result = bluetoothConnection()
+                dialog.dismiss()
+                Log.d("test", result.toString())
+                if(result == false){
+                    finish()
+                }
+                else{
+
+                }
+            }
+
+            mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            //확인 버튼 누르면 다음 액티비티 뜨도록
+            binding.bluetoothConfirmTv.setOnClickListener {
+                val intent = Intent(this, TrashNoticeActivity ::class.java)
+                this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
+                intent.putExtra("WEIGHT", weight.text)
+                startActivity(intent)
+            }
+        }
+        else{
+            finish()
+        }
+
+    }
+
+    private suspend fun bluetoothConnection():Boolean {
         //블루투스 어댑터 가져오기
         //블루투스 지원하지 않는 기기인 경우
+        var ret: Boolean = false
         if (bluetoothAdapter == null) {
 
         }
@@ -77,47 +136,36 @@ class BluetoothActivity: AppCompatActivity() {
                     requestPermissions(PERMISSIONS_S_ABOVE, REQUEST_ALL_PERMISSION)
                 }
                 else {
-                    jubjubiConnect();
+                    ret = jubjubiConnect();
                 }
             } else {
                 if (!hasPermissions(this, PERMISSIONS)) {
                     requestPermissions(PERMISSIONS, REQUEST_ALL_PERMISSION)
                 }
                 else {
-                    jubjubiConnect();
+                    ret = jubjubiConnect();
                 }
             }
-            mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
-            setContentView(binding.root)
         }
-            if (bluetoothAdapter?.isEnabled == false) {
-                val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                activityResultLauncher.launch(intent)
-            }
-
-            mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-        //확인 버튼 누르면 다음 액티비티 뜨도록
-
-        binding.bluetoothConfirmTv.setOnClickListener {
-            val intent = Intent(this, FinishJubgingActivity::class.java)
-            this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
-            startActivity(intent)
+        if (bluetoothAdapter?.isEnabled == false) {
+            val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            activityResultLauncher.launch(intent)
         }
+        return ret
     }
 
     @SuppressLint("MissingPermission")
-    private fun jubjubiConnect(){
+    private fun jubjubiConnect(): Boolean{
         val pairedDevices: Set<BluetoothDevice> =
             bluetoothAdapter?.bondedDevices as Set<BluetoothDevice>
         var jubjubiDevice: BluetoothDevice? = null
-
+        var ret: Boolean = false
         if (!pairedDevices.isEmpty()) {
             pairedDevices.forEach { device ->
                 if (device.name == "jubjubi") {
                     jubjubiDevice = device
                     //연결
-                    connectDevice(jubjubiDevice!!.address)
+                    ret = connectDevice(jubjubiDevice!!.address)
                 }
             }
         }
@@ -140,7 +188,7 @@ class BluetoothActivity: AppCompatActivity() {
                             if (deviceName == "jubjubi") {
                                 jubjubiDevice = device
                                 //연결
-                                connectDevice(jubjubiDevice!!.address)
+                                ret = connectDevice(jubjubiDevice!!.address)
                             }
                         }
                     }
@@ -150,13 +198,14 @@ class BluetoothActivity: AppCompatActivity() {
         registerReceiver(broadcastReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
 
         if (jubjubiDevice == null) {
-            findDevice()
+            return false
         }
+        return ret
     }
 
     //줍줍이 연결 요청
     @SuppressLint("MissingPermission")
-    private fun connectDevice(deviceAddress: String) {
+    private fun connectDevice(deviceAddress: String): Boolean {
         bluetoothAdapter?.let { adapter ->
             // 기기 검색을 수행중이라면 취소
             if (adapter.isDiscovering) {
@@ -168,12 +217,13 @@ class BluetoothActivity: AppCompatActivity() {
             // UUID 선언
             val uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
             try {
-                val thread = ConnectThread(uuid, device, handler)
-                thread.run()
+                bluetoothThread = ConnectThread(uuid, device, handler)
+                bluetoothThread.run()
             } catch (e: Exception) { // 연결에 실패할 경우 호출됨
-                return
+                return false
             }
         }
+        return true
     }
 
     //블루투스 권한
@@ -255,7 +305,7 @@ class BluetoothActivity: AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permissions granted!", Toast.LENGTH_SHORT).show()
-                    jubjubiConnect()
+                    //jubjubiConnect()
                 } else {
                     requestPermissions(permissions, REQUEST_ALL_PERMISSION)
                     Toast.makeText(this, "Permissions must be granted", Toast.LENGTH_SHORT).show()

@@ -3,7 +3,9 @@ package com.jubging.jubging;
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Handler
 import com.jubging.jubging.config.AuthorizationTokenInterceptor
+import com.jubging.jubging.ui.jubging.ConnectThread
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +24,8 @@ class ApplicationClass : Application() {
         lateinit var mSharedPreferences: SharedPreferences
         lateinit var retrofit: Retrofit
 
-        var photo_uri: String = ""
+        lateinit var bluetoothThread: ConnectThread
+        lateinit var handlerd: Handler
     }
 
 
