@@ -1,4 +1,4 @@
-package com.jubging.jubging.ui.login
+package com.jubging.jubging.data.remote.auth
 
 
 import com.mummoom.md.data.remote.auth.AuthResponse

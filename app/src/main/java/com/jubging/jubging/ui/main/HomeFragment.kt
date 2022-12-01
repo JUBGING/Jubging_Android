@@ -3,12 +3,14 @@ package com.jubging.jubging.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.jubging.jubging.data.remote.jubging.UserInfoService
+import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
+import com.jubging.jubging.data.remote.userInfo.UserInfoService
 import com.jubging.jubging.databinding.FragmentHomeBinding
 import com.jubging.jubging.ui.base.BaseFragment
 import com.mummoom.md.data.remote.auth.UserInfoResponse
 
-class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),GetUserInfoView {
+class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+    GetUserInfoView {
 
     override fun initAfterBinding() {
 

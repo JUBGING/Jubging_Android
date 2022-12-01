@@ -4,11 +4,11 @@ import android.content.Intent
 import android.widget.Toast
 import com.jubging.jubging.ApplicationClass
 import com.jubging.jubging.ApplicationClass.Companion.Authorization
-import com.jubging.jubging.data.remote.jubging.UserInfoService
+import com.jubging.jubging.data.remote.userInfo.UserInfoService
 import com.jubging.jubging.databinding.FragmentMypageBinding
 import com.jubging.jubging.ui.base.BaseFragment
 import com.jubging.jubging.ui.login.LoginActivity
-import com.jubging.jubging.ui.main.GetUserInfoView
+import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
 import com.mummoom.md.data.remote.auth.UserInfoResponse
 
 class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::inflate),

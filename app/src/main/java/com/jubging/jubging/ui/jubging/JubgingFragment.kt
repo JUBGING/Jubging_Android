@@ -7,12 +7,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,12 +21,14 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
+import com.jubging.jubging.data.remote.jubjubi.JubjubiService
+import com.jubging.jubging.data.remote.jubjubi.JubjubiView
 import com.jubging.jubging.databinding.FragmentJubgingBinding
-import java.io.IOException
-import java.util.*
+import com.mummoom.md.data.remote.auth.JubjubiResponse
 
 
-class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener{
+class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener{
 
     private var mContext: FragmentActivity? = null
 
@@ -53,7 +51,6 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
 
 
 
-
     override fun onAttach(context: Context) {
         mContext = activity as FragmentActivity
         super.onAttach(context)
@@ -63,13 +60,15 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         savedInstanceState: Bundle?
     ): View? {
 
-
         binding = FragmentJubgingBinding.inflate(inflater,container,false)
-
 
         binding.jubgingPlayCl.setOnClickListener{
             val intent = Intent(activity, JipgaeNumActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.jubgingRefreshFl.setOnClickListener{
+            getScreenLocation()
         }
 
         mView = binding.jubgingMap
@@ -141,6 +140,28 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         }
     }
 
+    private fun getScreenLocation() {
+
+        var leftTopPoint = mMap.projection.visibleRegion.latLngBounds.northeast
+        var rightBottomPoint = mMap.projection.visibleRegion.latLngBounds.southwest
+
+        var screenLocation = "$leftTopPoint $rightBottomPoint"
+
+        val jubjubiService = JubjubiService()
+        jubjubiService.getUserPosition(this,screenLocation)
+
+        Log.d("좌표위",leftTopPoint.toString())
+        Log.d("좌표아래",rightBottomPoint.toString())
+        Log.d("좌표",screenLocation.toString())
+    }
+
+    private fun getJubjubiInfo(jubjubiResponse: JubjubiResponse){
+        //jubjubiResponse 받아서 남은집게 변수들 이런거 설정해주기
+        //값들 넣어주는거
+        //근데 마커 설정도 해줘야함ㅎ;
+
+    }
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onMapReady(googleMap: GoogleMap) {
@@ -149,8 +170,10 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         setDefaultLocation()
         getLocationPermission()
         updateLocationUI()
+        getScreenLocation()
         mMap.setOnMarkerClickListener(this)
         mMap.setOnMapClickListener(this)
+
 
     }
 
@@ -167,6 +190,19 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
             }
         }
     }
+
+//    fun getBoundsWithoutSpacing(top: Int, right: Int, bottom: Int, left: Int): LatLngBounds? {
+//        val projection: Projection = mMap.projection
+//        val bounds = projection.visibleRegion.latLngBounds
+//        val northeast: Point = projection.toScreenLocation(bounds.northeast)
+//        val toNortheast = Point(northeast.x - right, northeast.y + top)
+//        val southwest: Point = projection.toScreenLocation(bounds.southwest)
+//        val toSouthwest = Point(southwest.x + left, southwest.y - bottom)
+//        val builder = LatLngBounds.Builder()
+//        builder.include(projection.fromScreenLocation(toNortheast))
+//        builder.include(projection.fromScreenLocation(toSouthwest))
+//        return builder.build()
+//    }
 
 //    fun setCurrentLocation(location: Location) {
 //        //if (currentMarker != null) currentMarker.remove()
@@ -282,7 +318,30 @@ class JubgingFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         super.onDestroy()
     }
 
+    override fun onJubjubiLoading() {
+    }
 
+    override fun onJubjubiSuccess(jubjubiResponse: JubjubiResponse) {
+        getJubjubiInfo(jubjubiResponse)
+
+    }
+
+    override fun onJubjubiFailure(errorCode: Int, message: String) {
+        when(errorCode){
+            4002 ->{
+                Toast.makeText(context, "userPosition 형식이 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            4011 ->{
+                Toast.makeText(context, "비활성화된 사용자입니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            4017 ->{
+                Toast.makeText(context, "회원탈퇴한 사용자입니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+    }
 
 
 }

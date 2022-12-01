@@ -1,11 +1,7 @@
-package com.jubging.jubging.data.remote.jubging
+package com.jubging.jubging.data.remote.userInfo
 
-import android.util.Log
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
-import com.jubging.jubging.data.remote.auth.AuthRetrofitInterface
-import com.jubging.jubging.data.remote.auth.SignUpResponse
-import com.jubging.jubging.ui.main.GetUserInfoView
 import com.mummoom.md.data.remote.auth.UserInfoResponse
 import org.json.JSONException
 import org.json.JSONObject

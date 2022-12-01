@@ -4,11 +4,13 @@ import android.view.View
 import android.widget.Toast
 import com.jubging.jubging.data.entities.User
 import com.jubging.jubging.data.remote.auth.AuthService
+import com.jubging.jubging.data.remote.auth.SignUpView
 import com.jubging.jubging.databinding.ActivitySignUpBinding
 import com.jubging.jubging.ui.base.BaseActivity
 import java.util.regex.Pattern
 
-class SignUpActivity:BaseActivity<ActivitySignUpBinding>(ActivitySignUpBinding::inflate),SignUpView, View.OnClickListener {
+class SignUpActivity:BaseActivity<ActivitySignUpBinding>(ActivitySignUpBinding::inflate),
+    SignUpView, View.OnClickListener {
 
     override fun initAfterBinding() {
         binding.signUpBackIv.setOnClickListener(this)

@@ -1,4 +1,4 @@
-package com.jubging.jubging.data.remote.jubging
+package com.jubging.jubging.data.remote.userInfo
 
 import retrofit2.Call
 import com.mummoom.md.data.remote.auth.UserInfoResponse
