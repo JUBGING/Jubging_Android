@@ -1,4 +1,4 @@
-package com.jubging.jubging.ui.signUp
+package com.jubging.jubging.data.remote.auth
 
 interface SignUpView {
     fun onSignUpLoading()

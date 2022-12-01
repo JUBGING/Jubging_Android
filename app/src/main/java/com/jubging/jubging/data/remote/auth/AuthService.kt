@@ -1,15 +1,10 @@
 package com.jubging.jubging.data.remote.auth
 
 import android.util.Log
-import android.widget.Toast
-import com.jubging.jubging.ApplicationClass
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.entities.User
 import com.jubging.jubging.data.remote.ErrorResponse
-import com.jubging.jubging.ui.signUp.SignUpView
-import com.jubging.jubging.ui.login.LoginView
 import com.mummoom.md.data.remote.auth.AuthResponse
-import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -58,7 +53,7 @@ object AuthService {
         })
     }
 
-    fun login(loginView: LoginView,user: User){
+    fun login(loginView: LoginView, user: User){
         val authService = retrofit.create(AuthRetrofitInterface::class.java)
 
         loginView.onLoginLoading()

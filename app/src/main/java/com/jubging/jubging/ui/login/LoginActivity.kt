@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Toast
 import com.jubging.jubging.data.entities.User
 import com.jubging.jubging.data.remote.auth.AuthService
+import com.jubging.jubging.data.remote.auth.LoginView
 import com.jubging.jubging.databinding.ActivityLoginBinding
 import com.jubging.jubging.ui.base.BaseActivity
 import com.jubging.jubging.ui.main.MainActivity
@@ -13,7 +14,7 @@ import com.jubging.jubging.utils.saveJwt
 import com.mummoom.md.data.remote.auth.AuthResponse
 import java.util.regex.Pattern
 
-class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),LoginView, View.OnClickListener {
+class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView, View.OnClickListener {
     override fun initAfterBinding() {
         binding.loginLoginTv.setOnClickListener(this)
         binding.loginSingUpTv.setOnClickListener(this)
