@@ -17,6 +17,7 @@ class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::
         binding.mypageLogoutTv.setOnClickListener{
             logout()
         }
+        //TODO: 내 프로필, 내 활동, 비밀번호 변경 액티비티 연결하기
     }
 
     override fun onStart() {

@@ -106,6 +106,10 @@
             android:name=".ui.jubging.CameraActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.mypage.MyactivityActivity"
+            android:exported="true">
+        </activity>
         
         <provider
             android:authorities="${applicationId}.provider"

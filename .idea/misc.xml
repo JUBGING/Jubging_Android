@@ -18,6 +18,7 @@
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_jubging_data.xml" value="0.1" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_login.xml" value="0.136" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_myactivity.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_myprofile.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_share.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/activity_sign_up.xml" value="0.23184357541899442" />
@@ -30,7 +31,7 @@
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_jubging.xml" value="0.6" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_jubging_data.xml" value="0.2644927536231884" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_mypage.xml" value="0.1765625" />
-        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_shop.xml" value="0.4" />
+        <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_shop.xml" value="0.264" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/fragment_shop_banner.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/item_product.xml" value="0.2" />
         <entry key="..\:/Users/hyeonsu/Documents/AndroidProject/Jubging_Android/app/src/main/res/layout/marker_layout.xml" value="0.1" />

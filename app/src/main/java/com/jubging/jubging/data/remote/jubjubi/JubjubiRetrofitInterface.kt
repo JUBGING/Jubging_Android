@@ -8,8 +8,8 @@ import retrofit2.http.*
 interface JubjubiRetrofitInterface {
 
     @GET("/api/v1/jubjubi/info/{userPosition}")
-    fun getUserPosition(
+    fun getJubjubiInfo(
         @Path("userPosition")userPosition: String
-    ): Call<JubjubiResponse>
+    ): Call<List<JubjubiResponse>>
 
 }

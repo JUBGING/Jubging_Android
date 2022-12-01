@@ -1,12 +1,9 @@
 package com.jubging.jubging.data.remote.jubjubi
 
-import android.content.Context
+import android.util.Log
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
-import com.jubging.jubging.data.remote.userInfo.UserInfoRetrofitInterface
-import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
 import com.mummoom.md.data.remote.auth.JubjubiResponse
-import com.mummoom.md.data.remote.auth.UserInfoResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -16,14 +13,23 @@ import retrofit2.Response
 
 class JubjubiService {
 
-    fun getUserPosition(jubjubiView: JubjubiView,userPosition: String){
-        val jubjubiService = retrofit.create(JubjubiRetrofitInterface::class.java)
 
-        jubjubiService.getUserPosition(userPosition).enqueue(object : Callback<JubjubiResponse> {
-            override fun onResponse(call: Call<JubjubiResponse>, response: Response<JubjubiResponse>) {
+    private lateinit var jubjubiView: JubjubiView
+
+    fun setJubjubiView(newView: JubjubiView){
+        jubjubiView = newView
+    }
+
+    fun getJubjubiInfo(userPosition: String){
+        val jubjubiService = retrofit.create(JubjubiRetrofitInterface::class.java)
+        Log.d("줍줍이들어오나",userPosition)
+
+        jubjubiService.getJubjubiInfo(userPosition).enqueue(object : Callback<List<JubjubiResponse>> {
+            override fun onResponse(call: Call<List<JubjubiResponse>>, response: Response<List<JubjubiResponse>>) {
 
                 if(response.code() == 200){
                     val resp = response.body()!!
+                    Log.d("줍줍1",resp.toString())
 ;                    jubjubiView.onJubjubiSuccess(resp)
                 }
                 else{
@@ -46,7 +52,7 @@ class JubjubiService {
 
             }
 
-            override fun onFailure(call: Call<JubjubiResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<JubjubiResponse>>, t: Throwable) {
                 jubjubiView.onJubjubiFailure(401,"네트워크 오류가 발생했습니다.")
             }
 

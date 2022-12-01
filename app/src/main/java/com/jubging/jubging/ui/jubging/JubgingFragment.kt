@@ -16,12 +16,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.gun0912.tedpermission.provider.TedPermissionProvider.context
+import com.jubging.jubging.R
 import com.jubging.jubging.data.remote.jubjubi.JubjubiService
 import com.jubging.jubging.data.remote.jubjubi.JubjubiView
 import com.jubging.jubging.databinding.FragmentJubgingBinding
@@ -50,6 +52,9 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     private val FASTEST_UPDATE_INTERVAL_MS = 1000 * 30
 
 
+    private var jubjubiList: List<JubjubiResponse> = ArrayList()
+
+
 
     override fun onAttach(context: Context) {
         mContext = activity as FragmentActivity
@@ -67,6 +72,7 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
             startActivity(intent)
         }
 
+        //새로고침 버튼 누르면
         binding.jubgingRefreshFl.setOnClickListener{
             getScreenLocation()
         }
@@ -108,7 +114,6 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
 
 
     private fun setDefaultLocation() {
-        //if (currentMarker != null) currentMarker.remove()
         val markerOptions = MarkerOptions()
         val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
         val b = bitmapdraw.bitmap
@@ -116,8 +121,11 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
 
         markerOptions.position(mDefaultLocation)
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
+        markerOptions.title("중앙대학교 208관")
+        markerOptions.alpha(1234.0F)
+        markerOptions.snippet("12")
 
-        mMap.addMarker(markerOptions)
+        mMap.addMarker(markerOptions)!!
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM)
         mMap.moveCamera(cameraUpdate)
     }
@@ -140,25 +148,59 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         }
     }
 
+//뷰설정해주고, 화면에서 좌표 받아서 좌표값 넘겨서 api 부름
     private fun getScreenLocation() {
 
-        var leftTopPoint = mMap.projection.visibleRegion.latLngBounds.northeast
-        var rightBottomPoint = mMap.projection.visibleRegion.latLngBounds.southwest
+        var leftTopPointLat = mMap.projection.visibleRegion.latLngBounds.northeast.latitude
+        var leftTopPointLng = mMap.projection.visibleRegion.latLngBounds.northeast.longitude
 
-        var screenLocation = "$leftTopPoint $rightBottomPoint"
+        var rightBottomPointLat = mMap.projection.visibleRegion.latLngBounds.southwest.latitude
+        var rightBottomPointLng = mMap.projection.visibleRegion.latLngBounds.southwest.longitude
+
+        var screenLocation = "$leftTopPointLat,$leftTopPointLng $rightBottomPointLat,$rightBottomPointLng"
+
 
         val jubjubiService = JubjubiService()
-        jubjubiService.getUserPosition(this,screenLocation)
+        jubjubiService.setJubjubiView(this)
+        jubjubiService.getJubjubiInfo(screenLocation)
 
-        Log.d("좌표위",leftTopPoint.toString())
-        Log.d("좌표아래",rightBottomPoint.toString())
+        Log.d("좌표위",leftTopPointLat.toString())
+        Log.d("좌표아래",leftTopPointLng.toString())
         Log.d("좌표",screenLocation.toString())
     }
 
-    private fun getJubjubiInfo(jubjubiResponse: JubjubiResponse){
-        //jubjubiResponse 받아서 남은집게 변수들 이런거 설정해주기
-        //값들 넣어주는거
-        //근데 마커 설정도 해줘야함ㅎ;
+
+
+    private fun setJubjubiInfo(jubjubiResponse: List<JubjubiResponse>) {
+        //줍줍이 응답 받아서 리스트에 넣기
+        jubjubiList = jubjubiResponse
+        //응답 리스트 하나씩 마커 추가함수에 넣어서 마커 추가해주기
+        for(element in jubjubiList){
+            addMarker(element)
+        }
+
+        //근데 또 그 마커를 누르면 그 마커에 맞는 값이 들어가야하는데
+        //Log.d("줍줍리스트",jubjubiList[0].toString())
+        //Log.d("줍줍리스트",jubjubiList[1].toString())
+        Log.d("줍줍리스폰스",jubjubiResponse.toString())
+    }
+
+    private fun addMarker(newJubjubi:JubjubiResponse){
+
+        val markerOptions = MarkerOptions()
+        val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
+        val b = bitmapdraw.bitmap
+        val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
+
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
+        markerOptions.position(LatLng(newJubjubi.lat.latitude,newJubjubi.lng.longitude))
+        //title에 줍줍이 이름
+        markerOptions.title(newJubjubi.name)
+        //alpha에 줍줍이 번호
+        markerOptions.alpha(newJubjubi.plastic_bag_cnt.toFloat())
+        //snippet에 집게 개수
+        markerOptions.snippet(newJubjubi.tongs_cnt.toString())
+        mMap.addMarker(markerOptions)!!
 
     }
 
@@ -204,17 +246,6 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
 //        return builder.build()
 //    }
 
-//    fun setCurrentLocation(location: Location) {
-//        //if (currentMarker != null) currentMarker.remove()
-//        val currentLatLng = LatLng(location.latitude, location.longitude)
-////        print(currentMarker)
-//        val markerOptions = MarkerOptions()
-//        markerOptions.position(currentLatLng)
-//        markerOptions.draggable(true)
-//        currentMarker = mMap.addMarker(markerOptions)!!
-//        val cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng)
-//        mMap.moveCamera(cameraUpdate)
-//    }
 
 
     private fun getLocationPermission() {
@@ -233,36 +264,13 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         }
     }
 
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String?>,
-//        grantResults: IntArray
-//    ) {
-//        mLocationPermissionGranted = false
-//        when (requestCode) {
-//            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-//                if (grantResults.size > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                ) {
-//                    mLocationPermissionGranted = true
-//                }
-//            }
-//        }
-//        updateLocationUI()
-//    }
-//
-//    fun checkLocationServicesStatus(): Boolean {
-//        val locationManager =
-//            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-//                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-//    }
 
-
-    override fun onMarkerClick(p0: Marker): Boolean {
+    override fun onMarkerClick(marker: Marker): Boolean {
         binding.jubgingInfoFl.visibility = View.VISIBLE
+        binding.jubgingTrashNameTv.text = marker.title
+        binding.jubgingTrashNumTv.text = marker.alpha.toString()
+        binding.jubgingJipgaeNumTv.text = marker.snippet
         return true
-        //마커 위경도에 따라서 받은 값들 데이터에 들어가게끔
     }
 
     override fun onMapClick(p0: LatLng) {
@@ -321,9 +329,8 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     override fun onJubjubiLoading() {
     }
 
-    override fun onJubjubiSuccess(jubjubiResponse: JubjubiResponse) {
-        getJubjubiInfo(jubjubiResponse)
-
+    override fun onJubjubiSuccess(jubjubiResponse: List<JubjubiResponse>) {
+        setJubjubiInfo(jubjubiResponse)
     }
 
     override fun onJubjubiFailure(errorCode: Int, message: String) {

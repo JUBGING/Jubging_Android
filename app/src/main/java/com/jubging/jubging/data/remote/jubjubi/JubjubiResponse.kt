@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class JubjubiResponse(
-    @SerializedName("name") val name: Int,
+    @SerializedName("name") val name: String,
     @SerializedName("plastic_bag_cnt") val plastic_bag_cnt: Int,
     @SerializedName("tongs_cnt") val tongs_cnt: Int,
     @SerializedName("lat") val lat: LatLng,
