@@ -1,11 +1,13 @@
 package com.jubging.jubging.ui.jubging
 
 import android.Manifest
+import android.R
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.os.Bundle
@@ -16,14 +18,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
-import com.jubging.jubging.R
 import com.jubging.jubging.data.remote.jubjubi.JubjubiService
 import com.jubging.jubging.data.remote.jubjubi.JubjubiView
 import com.jubging.jubging.databinding.FragmentJubgingBinding
@@ -51,10 +50,7 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     private val UPDATE_INTERVAL_MS = 1000 * 60 * 1 // 1분 단위 시간 갱신
     private val FASTEST_UPDATE_INTERVAL_MS = 1000 * 30
 
-
     private var jubjubiList: List<JubjubiResponse> = ArrayList()
-
-
 
     override fun onAttach(context: Context) {
         mContext = activity as FragmentActivity
@@ -113,19 +109,14 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     }
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setDefaultLocation() {
         val markerOptions = MarkerOptions()
-        val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
-        val b = bitmapdraw.bitmap
-        val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
+//        val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
+//        val b = bitmapdraw.bitmap
+//        val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
 
         markerOptions.position(mDefaultLocation)
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
-        markerOptions.title("중앙대학교 208관")
-        markerOptions.alpha(1234.0F)
-        markerOptions.snippet("12")
-
-        mMap.addMarker(markerOptions)!!
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM)
         mMap.moveCamera(cameraUpdate)
     }
@@ -157,16 +148,15 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         var rightBottomPointLat = mMap.projection.visibleRegion.latLngBounds.southwest.latitude
         var rightBottomPointLng = mMap.projection.visibleRegion.latLngBounds.southwest.longitude
 
-        var screenLocation = "$leftTopPointLat,$leftTopPointLng $rightBottomPointLat,$rightBottomPointLng"
+        var screenLocation = "$leftTopPointLat,$rightBottomPointLng $rightBottomPointLat,$leftTopPointLng"
 
 
         val jubjubiService = JubjubiService()
         jubjubiService.setJubjubiView(this)
         jubjubiService.getJubjubiInfo(screenLocation)
 
-        Log.d("좌표위",leftTopPointLat.toString())
-        Log.d("좌표아래",leftTopPointLng.toString())
-        Log.d("좌표",screenLocation.toString())
+
+        Log.d("좌표",screenLocation)
     }
 
 
@@ -178,29 +168,33 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         for(element in jubjubiList){
             addMarker(element)
         }
-
-        //근데 또 그 마커를 누르면 그 마커에 맞는 값이 들어가야하는데
-        //Log.d("줍줍리스트",jubjubiList[0].toString())
-        //Log.d("줍줍리스트",jubjubiList[1].toString())
         Log.d("줍줍리스폰스",jubjubiResponse.toString())
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun addMarker(newJubjubi:JubjubiResponse){
+        Log.d("줍줍마커", newJubjubi.toString())
 
-        val markerOptions = MarkerOptions()
+//        val bitmap : Bitmap = BitmapFactory.decodeResource(resources,com.jubging.jubging.R.drawable.trash_can_orange)
+//        val customMarker = Bitmap.createScaledBitmap(bitmap, 120, 120, false)
+
+
+       //val testImg = BitmapFactory.decodeResource(resources, com.jubging.jubging.R.drawable.marker)
+
         val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
         val b = bitmapdraw.bitmap
         val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
 
+        val markerOptions = MarkerOptions()
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
-        markerOptions.position(LatLng(newJubjubi.lat.latitude,newJubjubi.lng.longitude))
+        markerOptions.position(LatLng(newJubjubi.lat,newJubjubi.lng))
         //title에 줍줍이 이름
         markerOptions.title(newJubjubi.name)
         //alpha에 줍줍이 번호
-        markerOptions.alpha(newJubjubi.plastic_bag_cnt.toFloat())
+        markerOptions.alpha(newJubjubi.jubjubi_id.toFloat())
         //snippet에 집게 개수
         markerOptions.snippet(newJubjubi.tongs_cnt.toString())
-        mMap.addMarker(markerOptions)!!
+        mMap.addMarker(markerOptions)
 
     }
 
@@ -233,20 +227,6 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         }
     }
 
-//    fun getBoundsWithoutSpacing(top: Int, right: Int, bottom: Int, left: Int): LatLngBounds? {
-//        val projection: Projection = mMap.projection
-//        val bounds = projection.visibleRegion.latLngBounds
-//        val northeast: Point = projection.toScreenLocation(bounds.northeast)
-//        val toNortheast = Point(northeast.x - right, northeast.y + top)
-//        val southwest: Point = projection.toScreenLocation(bounds.southwest)
-//        val toSouthwest = Point(southwest.x + left, southwest.y - bottom)
-//        val builder = LatLngBounds.Builder()
-//        builder.include(projection.fromScreenLocation(toNortheast))
-//        builder.include(projection.fromScreenLocation(toSouthwest))
-//        return builder.build()
-//    }
-
-
 
     private fun getLocationPermission() {
         if (ContextCompat.checkSelfPermission(
@@ -268,7 +248,7 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     override fun onMarkerClick(marker: Marker): Boolean {
         binding.jubgingInfoFl.visibility = View.VISIBLE
         binding.jubgingTrashNameTv.text = marker.title
-        binding.jubgingTrashNumTv.text = marker.alpha.toString()
+        binding.jubgingTrashNumTv.text = marker.alpha.toInt().toString()
         binding.jubgingJipgaeNumTv.text = marker.snippet
         return true
     }
@@ -330,6 +310,7 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     }
 
     override fun onJubjubiSuccess(jubjubiResponse: List<JubjubiResponse>) {
+        Log.d("줍줍리스폰스11",jubjubiResponse.toString())
         setJubjubiInfo(jubjubiResponse)
     }
 
