@@ -9,6 +9,7 @@ import com.jubging.jubging.databinding.FragmentMypageBinding
 import com.jubging.jubging.ui.base.BaseFragment
 import com.jubging.jubging.ui.login.LoginActivity
 import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
+import com.jubging.jubging.ui.jubging.JipgaeNumActivity
 import com.mummoom.md.data.remote.auth.UserInfoResponse
 
 class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::inflate),
@@ -17,7 +18,18 @@ class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::
         binding.mypageLogoutTv.setOnClickListener{
             logout()
         }
-        //TODO: 내 프로필, 내 활동, 비밀번호 변경 액티비티 연결하기
+        binding.mypageMyprofileTv.setOnClickListener{
+            val intent = Intent(activity, MyprofileActivity::class.java)
+            startActivity(intent)
+        }
+        binding.mypageMyactivityTv.setOnClickListener{
+            val intent = Intent(activity, MyactivityActivity::class.java)
+            startActivity(intent)
+        }
+        binding.mypageChangePwdTv.setOnClickListener{
+            val intent = Intent(activity, ChangePwdActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {

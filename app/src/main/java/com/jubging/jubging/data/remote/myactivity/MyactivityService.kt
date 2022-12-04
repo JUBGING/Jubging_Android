@@ -1,11 +1,15 @@
-package com.jubging.jubging.data.remote.jubjubi
+package com.jubging.jubging.data.remote.myactivity
 
 import android.util.Log
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
+import com.jubging.jubging.data.remote.jubjubi.JubjubiRetrofitInterface
+import com.jubging.jubging.data.remote.jubjubi.JubjubiView
+import com.jubging.jubging.data.remote.userInfo.UserInfoRetrofitInterface
 import com.mummoom.md.data.remote.auth.JubjubiResponse
+import com.mummoom.md.data.remote.auth.UserInfoResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -13,29 +17,25 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class JubjubiService {
+class MyactivityService {
 
+    private lateinit var myactivityView: MyactivityView
 
-    private lateinit var jubjubiView: JubjubiView
-
-    fun setJubjubiView(newView: JubjubiView){
-        jubjubiView = newView
+    fun setMyactivityView(newView: MyactivityView){
+        myactivityView = newView
     }
 
-    fun getJubjubiInfo(userPosition: String){
-        val jubjubiService = retrofit.create(JubjubiRetrofitInterface::class.java)
-         Log.d("줍줍이들어오나",userPosition)
+    fun getMyactivity(){
+        val myactivityService = retrofit.create(MyactivityRetrofitInterface::class.java)
 
-        jubjubiService.getJubjubiInfo(userPosition).enqueue(object : Callback<List<JubjubiResponse>> {
-            override fun onResponse(call: Call<List<JubjubiResponse>>, response: Response<List<JubjubiResponse>>) {
-                Log.d("줍줍api",response.toString())
+        myactivityService.getMyactivity().enqueue(object : Callback<ArrayList<MyactivityResponse>> {
+            override fun onResponse(call: Call<ArrayList<MyactivityResponse>>, response: Response<ArrayList<MyactivityResponse>>) {
+                Log.d("활동들어오나",response.toString())
                 if(response.code() == 200){
-                    Log.d("줍줍정상",response.toString())
                     val resp = response.body()!!
-;                    jubjubiView.onJubjubiSuccess(resp)
+                    myactivityView.onMyactivitySuccess(resp)
                 }
                 else{
-                    Log.d("줍줍에러",response.errorBody().toString())
                     var jsonObject: JSONObject? = null
                     var errorDto : ErrorResponse? = null
                     try{
@@ -49,18 +49,15 @@ class JubjubiService {
                     }
 
                     if (errorDto != null) {
-                        jubjubiView.onJubjubiFailure(errorDto.errorCode, errorDto.message)
+                        myactivityView.onMyactivityFailure(errorDto.errorCode, errorDto.message)
                     }
                 }
 
             }
 
-            override fun onFailure(call: Call<List<JubjubiResponse>>, t: Throwable) {
-                Log.d("박정훈박서준",call.toString())
-                jubjubiView.onJubjubiFailure(401,"네트워크 오류가 발생했습니다.")
+            override fun onFailure(call: Call<ArrayList<MyactivityResponse>>, t: Throwable) {
+                myactivityView.onMyactivityFailure(401,"네트워크 오류가 발생했습니다.")
             }
-
-
         })
     }
 

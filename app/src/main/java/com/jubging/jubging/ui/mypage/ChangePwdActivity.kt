@@ -5,6 +5,9 @@ import com.jubging.jubging.ui.base.BaseActivity
 
 class ChangePwdActivity: BaseActivity<ActivityChangePwdBinding>(ActivityChangePwdBinding::inflate) {
     override fun initAfterBinding() {
+        binding.changePwdBackIv.setOnClickListener {
+            finish()
+        }
 
     }
 }

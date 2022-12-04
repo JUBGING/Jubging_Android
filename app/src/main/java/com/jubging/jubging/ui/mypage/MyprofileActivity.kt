@@ -5,6 +5,9 @@ import com.jubging.jubging.ui.base.BaseActivity
 
 class MyprofileActivity:BaseActivity<ActivityMyprofileBinding>(ActivityMyprofileBinding::inflate) {
     override fun initAfterBinding() {
+        binding.myprofileBackIv.setOnClickListener {
+            finish()
+        }
 
     }
 }
