@@ -117,7 +117,9 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
 //        val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
 
         markerOptions.position(mDefaultLocation)
+//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
         val cameraUpdate = CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM)
+//        mMap.addMarker(markerOptions)
         mMap.moveCamera(cameraUpdate)
     }
 
@@ -174,19 +176,12 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun addMarker(newJubjubi:JubjubiResponse){
         Log.d("줍줍마커", newJubjubi.toString())
-
-//        val bitmap : Bitmap = BitmapFactory.decodeResource(resources,com.jubging.jubging.R.drawable.trash_can_orange)
-//        val customMarker = Bitmap.createScaledBitmap(bitmap, 120, 120, false)
-
-
-       //val testImg = BitmapFactory.decodeResource(resources, com.jubging.jubging.R.drawable.marker)
-
         val bitmapdraw = resources.getDrawable(com.jubging.jubging.R.drawable.trash_can_orange) as BitmapDrawable
         val b = bitmapdraw.bitmap
         val customMarker = Bitmap.createScaledBitmap(b, 130, 130, false)
 
         val markerOptions = MarkerOptions()
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
+        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(customMarker))
         markerOptions.position(LatLng(newJubjubi.lat,newJubjubi.lng))
         //title에 줍줍이 이름
         markerOptions.title(newJubjubi.name)
@@ -195,7 +190,6 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         //snippet에 집게 개수
         markerOptions.snippet(newJubjubi.tongs_cnt.toString())
         mMap.addMarker(markerOptions)
-
     }
 
 
@@ -207,9 +201,9 @@ class JubgingFragment : Fragment(),JubjubiView, OnMapReadyCallback, GoogleMap.On
         getLocationPermission()
         updateLocationUI()
         getScreenLocation()
+        //mMap이 다른듯
         mMap.setOnMarkerClickListener(this)
         mMap.setOnMapClickListener(this)
-
 
     }
 
