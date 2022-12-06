@@ -117,6 +117,7 @@
             android:layout_marginTop="45dp"
             android:paddingStart="30dp"
             android:singleLine="true"
+            android:inputType="textEmailAddress"
             android:background="@drawable/edittext_rounded_rectangle"
             />
 

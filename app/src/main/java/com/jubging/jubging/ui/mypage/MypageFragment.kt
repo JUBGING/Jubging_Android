@@ -1,6 +1,7 @@
 package com.jubging.jubging.ui.mypage
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import com.jubging.jubging.ApplicationClass
@@ -21,10 +22,9 @@ class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::
     GetUserInfoView {
     override fun initAfterBinding() {
         binding.mypageLogoutTv.setOnClickListener{
-            getLogoutResponse()
+            logout()
 
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
+
         }
         binding.mypageMyprofileTv.setOnClickListener{
             val intent = Intent(activity, MyprofileActivity::class.java)
@@ -53,6 +53,7 @@ class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::
     }
 
     private fun getLogoutResponse(){
+        Log.d("로그아웃 실행","그냥")
         val logoutService = LogoutService()
         logoutService.setLogoutView(this)
         logoutService.logout()
@@ -98,7 +99,9 @@ class MypageFragment:BaseFragment<FragmentMypageBinding>(FragmentMypageBinding::
     }
 
     override fun onLogoutSuccess(logoutResponse: LogoutResponse) {
-        getLogoutResponse()
+        Log.d("로그아웃성공",logoutResponse.toString())
+        val intent = Intent(activity, LoginActivity::class.java)
+        startActivity(intent)
     }
     override fun onLogoutFailure(errorCode: Int, message: String) {
         when(errorCode){

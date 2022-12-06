@@ -1,15 +1,8 @@
 package com.jubging.jubging.data.remote.myactivity
 
 import android.util.Log
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
-import com.jubging.jubging.data.remote.jubjubi.JubjubiRetrofitInterface
-import com.jubging.jubging.data.remote.jubjubi.JubjubiView
-import com.jubging.jubging.data.remote.userInfo.UserInfoRetrofitInterface
-import com.mummoom.md.data.remote.auth.JubjubiResponse
-import com.mummoom.md.data.remote.auth.UserInfoResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
