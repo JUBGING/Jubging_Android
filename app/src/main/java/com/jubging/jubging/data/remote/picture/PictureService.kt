@@ -25,12 +25,10 @@ object PictureService {
             override fun onResponse(call: Call<PictureResponse>, response: Response<PictureResponse>) {
                 Log.d("카메라uri",uri.toString())
                 if(response.code() == 200){
-                    //Log.d("줍줍정상",response.toString())
                     val resp = response.body()!!
 ;                    pictureView.onPictureSuccess(resp)
                 }
                 else{
-                    //Log.d("줍줍에러",response.errorBody().toString())
                     var jsonObject: JSONObject? = null
                     var errorDto : ErrorResponse? = null
                     try{

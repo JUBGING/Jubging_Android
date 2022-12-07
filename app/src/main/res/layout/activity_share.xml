@@ -68,7 +68,6 @@
                     android:id="@+id/share_distance_data_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.00"
                     android:fontFamily="@font/bold_num"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -110,7 +109,6 @@
                     android:id="@+id/share_kcal_data_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="203"
                     android:fontFamily="@font/bold_num"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -145,7 +143,6 @@
                 android:id="@+id/share_time_data_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00:00"
                 android:fontFamily="@font/bold_num"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -171,7 +168,6 @@
                 android:id="@+id/share_walk_data_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
                 android:fontFamily="@font/bold_num"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -206,6 +202,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10"
+                android:fontFamily="@font/bold_num"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/share_weight_unit_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="KG"
                 android:fontFamily="@font/bold_num"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -295,6 +302,8 @@
             app:layout_constraintStart_toStartOf="@id/share_share_btn_iv"
             app:layout_constraintEnd_toEndOf="@id/share_share_btn_iv"
             android:src="@drawable/share_white"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

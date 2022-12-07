@@ -13,21 +13,23 @@ import com.jubging.jubging.ui.base.BaseActivity
 import com.mummoom.md.data.remote.auth.StartJubgingResponse
 
 class JipgaeNumActivity: BaseActivity<ActivityJipgaeNumBinding>(ActivityJipgaeNumBinding::inflate),StartJubgingView {
+
+    var tongsId: Int = 0
+    var jubjubiId : Int = 0
+
     override fun initAfterBinding() {
         binding.jipgaeNumConfirmTv.setOnClickListener {
             if(binding.jipgaeNumEt.text.isEmpty())
                 Toast.makeText(this, "집게 번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             else{
                 startJubging()
-                val intent = Intent(this, JubgingDataActivity::class.java)
-                startActivity(intent)
             }
         }
     }
 
     private fun startJubging(){
-        val tongsId = Integer.parseInt(binding.jipgaeNumEt.text.toString())
-        val jubjubiId = intent.getIntExtra("jubjubi_id",0)//getIntExtra로 intent에서 가져오기
+        tongsId = Integer.parseInt(binding.jipgaeNumEt.text.toString())
+        jubjubiId = intent.getIntExtra("jubjubi_id",0)//getIntExtra로 intent에서 가져오기
         val ids = Ids(tongsId,jubjubiId)
         Log.d("시작줍깅부르기",ids.toString())
         JubjubiService().startJubging(this,ids)
@@ -37,6 +39,10 @@ class JipgaeNumActivity: BaseActivity<ActivityJipgaeNumBinding>(ActivityJipgaeNu
     }
 
     override fun onStartJubgingSuccess(startJubgingResponse: StartJubgingResponse) {
+        val intent = Intent(this, JubgingDataActivity::class.java)
+        intent.putExtra("tongs_id",tongsId)
+        this.intent.getIntExtra("jubjubi_id",0).let { intent.putExtra("jubjubi_id", it)}
+        startActivity(intent)
         Log.d("줍깅시작성공",startJubgingResponse.toString())
     }
 

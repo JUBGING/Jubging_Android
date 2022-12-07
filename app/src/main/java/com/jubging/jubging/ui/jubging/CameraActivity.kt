@@ -52,10 +52,16 @@ class CameraActivity : AppCompatActivity(),PictureView {
             binding.cameraConfirmTv.setOnClickListener() {
                 putUri(newFile)
                 val nextIntent = Intent(this, BluetoothActivity::class.java)
+                this.intent.getIntExtra("walk",0).let { nextIntent.putExtra("walk", it)}
+                this.intent.getIntExtra("time",0).let { nextIntent.putExtra("time", it)}
+                this.intent.getFloatExtra("distance",0.0f).let { nextIntent.putExtra("distance", it)}
+                this.intent.getIntExtra("kcal",0).let { nextIntent.putExtra("kcal", it)}
+                this.intent.getBooleanExtra("tongs_return",true).let { nextIntent.putExtra("tongs_return", it)}
+                this.intent.getIntExtra("jubjubi_id",0).let { nextIntent.putExtra("jubjubi_id", it)}
+                this.intent.getIntExtra("tongs_id",0).let { nextIntent.putExtra("tongs_id", it)}
+                Log.d("줍깅카메라",this.intent.getIntExtra("jubjubi_id",0).toString())
                 nextIntent.putExtra("URI", newFile.path)
-                //Log.d("카메라패스",newFile.path.toString())
                 startActivity(nextIntent)
-
             }
         }
     }

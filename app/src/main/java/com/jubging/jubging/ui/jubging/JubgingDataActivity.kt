@@ -34,6 +34,11 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
     private val REQUEST_PERMISSION_LOCATION = 10
     private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
+    private var distance =0.0
+    private var time = 0
+    private var walk = 0
+    private var kcal = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +60,20 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
         val mapFragment: SupportMapFragment = supportFragmentManager.findFragmentById(com.jubging.jubging.R.id.jubging_data_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        binding.jubgingDataWalk.text = walk.toString()
+        binding.jubgingDataDistance.text = distance.toString()
+        binding.jubgingDataTime.text = time.toString()
+        binding.jubgingDataKcal.text = kcal.toString()
 
 
         binding.jubgindDataPlayFl.setOnClickListener{
             val intent = Intent(this, JipgaeNoticeActivity::class.java)
+            intent.putExtra("walk",walk)
+            intent.putExtra("distance",distance)
+            intent.putExtra("time",time)
+            intent.putExtra("kcal",kcal)
+            this.intent.getIntExtra("jubjubi_id",0).let { intent.putExtra("jubjubi_id", it)}
+            this.intent.getIntExtra("tongs_id",0).let { intent.putExtra("tongs_id", it)}
             startActivity(intent)
         }
 
@@ -72,10 +87,10 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
         getLocationPermission()
         updateLocationUI()
 
-        val marker = LatLng(37.503371,126.957053)
+        val cau = LatLng(37.503371,126.957053)
 
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15f))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cau))
 
     }
 

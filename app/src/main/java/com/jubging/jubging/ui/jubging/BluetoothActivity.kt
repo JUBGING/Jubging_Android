@@ -54,7 +54,7 @@ class BluetoothActivity: AppCompatActivity() {
             }
             Log.d("test", str.toString())
             Log.d("TEST", this.looper.toString())
-            weight.setText(str + " KG")
+            weight.setText(str)
         }
     }
 
@@ -109,10 +109,19 @@ class BluetoothActivity: AppCompatActivity() {
             mBinding = ActivityBluetoothBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
+
             //확인 버튼 누르면 다음 액티비티 뜨도록
             binding.bluetoothConfirmTv.setOnClickListener {
                 val intent = Intent(this, TrashNoticeActivity ::class.java)
+                this.intent.getIntExtra("walk",0).let { intent.putExtra("walk", it)}
+                this.intent.getIntExtra("time",0).let { intent.putExtra("time", it)}
+                this.intent.getFloatExtra("distance",0.0f).let { intent.putExtra("distance", it)}
+                this.intent.getIntExtra("kcal",0).let { intent.putExtra("kcal", it)}
+                this.intent.getBooleanExtra("tongs_return",true).let { intent.putExtra("tongs_return", it)}
+                this.intent.getIntExtra("jubjubi_id",0).let { intent.putExtra("jubjubi_id", it)}
+                this.intent.getIntExtra("tongs_id",0).let { intent.putExtra("tongs_id", it)}
                 this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
+                Log.d("줍깅블루투스",this.intent.getIntExtra("jubjubi_id",0).toString())
                 intent.putExtra("WEIGHT", weight.text)
                 startActivity(intent)
             }

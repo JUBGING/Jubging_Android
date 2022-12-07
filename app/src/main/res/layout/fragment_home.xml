@@ -261,7 +261,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/home_goal_2_iv"
-                android:src="@drawable/earth_color"/>
+                android:src="@drawable/earth_black"/>
 
             <ImageView
                 android:id="@+id/home_goal_2_iv"
@@ -270,7 +270,7 @@
                 app:layout_constraintStart_toEndOf="@id/home_goal_1_iv"
                 app:layout_constraintEnd_toStartOf="@id/home_goal_3_iv"
                 app:layout_constraintTop_toTopOf="@id/home_goal_1_iv"
-                android:src="@drawable/earth_color"/>
+                android:src="@drawable/earth_black"/>
 
             <ImageView
                 android:id="@+id/home_goal_3_iv"
