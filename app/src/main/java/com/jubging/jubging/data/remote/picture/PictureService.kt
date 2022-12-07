@@ -5,6 +5,7 @@ import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
 import com.mummoom.md.data.remote.auth.PictureResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -15,7 +16,7 @@ import retrofit2.Response
 object PictureService {
 
 //뭘받아서 넣어줄지 uri 부분에
-    fun sendUri(pictureView:PictureView,uri:MultipartBody.Part){
+    fun sendUri(pictureView:PictureView,uri: MultipartBody.Part){
     Log.d("카메라서비스",uri.toString())
         val pictureService = retrofit.create(PictureRetrofitInterface::class.java)
 
