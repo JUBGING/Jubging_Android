@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jubging.jubging">
 
+    <!-- Check whether Health Connect is installed or not -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
+
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 블루투스 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -30,7 +35,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /> <!-- bibo01 : hardware option -->
     <!-- 카메라 권한-->
     <uses-feature android:name="android.hardware.camera2" android:required="true"/>
-
+    <!-- 저장소 권한-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
@@ -54,6 +59,22 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBmOGGqKZTScEPyWgXpNdlHfdFPilWNNKk" />
+
+<!--  구글 헬스 -->
+        <!-- Activity to show rationale of Health Connect permissions -->
+        <activity
+            android:name=".PermissionsRationaleActivity"
+            android:exported="true"
+            android:enabled="true">
+            <!-- (a) reference permissions resource -->
+            <meta-data
+                android:name="health_permissions"
+                android:resource="@array/health_permissions" />
+            <!-- (b) handle intent -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.splash.SplashActivity"

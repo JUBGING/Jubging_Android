@@ -1,8 +1,10 @@
-package com.jubging.jubging.data.remote.myactivity
+package com.jubging.jubging.data.remote.picture
 
 import android.util.Log
 import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.remote.ErrorResponse
+import com.mummoom.md.data.remote.auth.PictureResponse
+import okhttp3.MultipartBody
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -10,23 +12,21 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MyactivityService {
+object PictureService {
 
-    private lateinit var myactivityView: MyactivityView
+//뭘받아서 넣어줄지 uri 부분에
+    fun sendUri(pictureView:PictureView,uri:MultipartBody.Part){
+    Log.d("카메라서비스",uri.toString())
+        val pictureService = retrofit.create(PictureRetrofitInterface::class.java)
 
-    fun setMyactivityView(newView: MyactivityView){
-        myactivityView = newView
-    }
+        pictureView.onPictureLoading()
 
-    fun getMyactivity(){
-        val myactivityService = retrofit.create(MyactivityRetrofitInterface::class.java)
-
-        myactivityService.getMyactivity().enqueue(object : Callback<ArrayList<MyactivityResponse>> {
-            override fun onResponse(call: Call<ArrayList<MyactivityResponse>>, response: Response<ArrayList<MyactivityResponse>>) {
-                Log.d("활동들어오나",response.toString())
+        pictureService.putPicture(uri).enqueue(object : Callback<PictureResponse> {
+            override fun onResponse(call: Call<PictureResponse>, response: Response<PictureResponse>) {
+                Log.d("카메라uri",uri.toString())
                 if(response.code() == 200){
                     val resp = response.body()!!
-                    myactivityView.onMyactivitySuccess(resp)
+;                    pictureView.onPictureSuccess(resp)
                 }
                 else{
                     var jsonObject: JSONObject? = null
@@ -42,14 +42,15 @@ class MyactivityService {
                     }
 
                     if (errorDto != null) {
-                        myactivityView.onMyactivityFailure(errorDto.errorCode, errorDto.message)
+                        pictureView.onPictureFailure(errorDto.errorCode, errorDto.message)
                     }
                 }
 
             }
 
-            override fun onFailure(call: Call<ArrayList<MyactivityResponse>>, t: Throwable) {
-                myactivityView.onMyactivityFailure(401,"네트워크 오류가 발생했습니다.")
+            override fun onFailure(call: Call<PictureResponse>, t: Throwable) {
+                Log.d("카메라패일",t.message.toString())
+                pictureView.onPictureFailure(401,"네트워크 오류가 발생했습니다.")
             }
         })
     }

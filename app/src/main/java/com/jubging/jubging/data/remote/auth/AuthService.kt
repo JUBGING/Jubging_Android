@@ -5,6 +5,7 @@ import com.jubging.jubging.ApplicationClass.Companion.retrofit
 import com.jubging.jubging.data.entities.User
 import com.jubging.jubging.data.remote.ErrorResponse
 import com.mummoom.md.data.remote.auth.AuthResponse
+import com.mummoom.md.data.remote.auth.LogoutResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -91,4 +92,6 @@ object AuthService {
             }
         })
     }
+
+
 }

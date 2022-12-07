@@ -29,6 +29,10 @@ class MainActivity: BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
 
+    companion object{
+        var jubgingCountM = 0
+    }
+
 
 
     override fun initAfterBinding() {
@@ -127,6 +131,3 @@ class MainActivity: BaseActivity<ActivityMainBinding>(ActivityMainBinding::infla
 
 
 }
-
-
-

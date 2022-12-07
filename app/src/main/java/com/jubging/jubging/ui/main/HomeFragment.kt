@@ -4,17 +4,50 @@ import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
+import com.jubging.jubging.R
 import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
 import com.jubging.jubging.data.remote.userInfo.UserInfoService
 import com.jubging.jubging.databinding.FragmentHomeBinding
 import com.jubging.jubging.ui.base.BaseFragment
 import com.mummoom.md.data.remote.auth.UserInfoResponse
 
-class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
-    GetUserInfoView {
+class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), GetUserInfoView {
+
+    var jubgingCount = MainActivity.jubgingCountM
 
     override fun initAfterBinding() {
 
+        if(jubgingCount == 0){
+            binding.homeGoal1Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal2Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal3Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal4Iv.setImageResource(R.drawable.earth_black)
+        }
+        else if(jubgingCount == 1){
+            binding.homeGoal1Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal2Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal3Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal4Iv.setImageResource(R.drawable.earth_black)
+        }
+        else if(jubgingCount == 2){
+            binding.homeGoal1Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal2Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal3Iv.setImageResource(R.drawable.earth_black)
+            binding.homeGoal4Iv.setImageResource(R.drawable.earth_black)
+        }
+        else if(jubgingCount == 3){
+            binding.homeGoal1Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal2Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal3Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal4Iv.setImageResource(R.drawable.earth_black)
+        }
+        else {
+            binding.homeGoal1Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal2Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal3Iv.setImageResource(R.drawable.earth_color)
+            binding.homeGoal4Iv.setImageResource(R.drawable.earth_color)
+        }
 
     }
 
@@ -23,13 +56,6 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
 
         getUserResponse()
     }
-
-
-//    override fun onStart() {
-//        super.onStart()
-//
-//        getUserResponse()
-//    }
 
     private fun getUserResponse(){
         val myUserInfoService = UserInfoService()
