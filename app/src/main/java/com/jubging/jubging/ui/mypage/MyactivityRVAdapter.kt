@@ -19,9 +19,9 @@ class MyactivityRVAdapter(val context: Context) : RecyclerView.Adapter<Myactivit
     inner class ViewHolder(val binding: ItemMyactivityBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(myactivityResponse: MyactivityResponse){
             Log.d("활동응답",myactivityResponse.toString())
-//            Glide.with(context)
-//                .load(myactivityResponse.imgUrl)
-//                .into(binding.itemMyactivityIv)
+            Glide.with(context)
+                .load(myactivityResponse.imgUrl)
+                .into(binding.itemMyactivityIv)
 
 //            binding.itemMyactivityDateTv.text = myactivityResponse.date
             binding.itemMyactivityTimeData.text = myactivityResponse.time
