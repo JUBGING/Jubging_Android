@@ -14,6 +14,7 @@ interface PictureRetrofitInterface {
     @POST("/api/v1/jubjubi/jubging-data/img")
     fun putPicture(
         @Part image:MultipartBody.Part,
+        @Part("weight") weight:RequestBody
     ): Call<PictureResponse>
 
 }

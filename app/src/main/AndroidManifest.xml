@@ -63,7 +63,7 @@
 <!--  구글 헬스 -->
         <!-- Activity to show rationale of Health Connect permissions -->
         <activity
-            android:name=".PermissionsRationaleActivity"
+            android:name=".ui.jubging.JubgingDataActivity"
             android:exported="true"
             android:enabled="true">
             <!-- (a) reference permissions resource -->
@@ -107,9 +107,6 @@
             android:exported="true" />
         <activity
             android:name=".ui.jubging.TrashNoticeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.jubging.JubgingDataActivity"
             android:exported="true" />
         <activity
             android:name=".ui.jubging.JipgaeNumActivity"

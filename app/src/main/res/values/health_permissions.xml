@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="health_permissions">
-        <item>androidx.health.permission.HeartRate.READ</item>
-        <item>androidx.health.permission.HeartRate.WRITE</item>
+        <item>androidx.health.permission.ActivitySession.READ</item>
+        <item>androidx.health.permission.ActivitySession.WRITE</item>
+        <item>androidx.health.permission.ActivityEvent.READ</item>
+        <item>androidx.health.permission.ActivityEvent.WRITE</item>
         <item>androidx.health.permission.Steps.READ</item>
         <item>androidx.health.permission.Steps.WRITE</item>
+        <item>androidx.health.permission.Distance.READ</item>
+        <item>androidx.health.permission.Distance.WRITE</item>
+        <item>androidx.health.permission.TotalCaloriesBurned.READ</item>
+        <item>androidx.health.permission.TotalCaloriesBurned.WRITE</item>
     </array>
 </resources>

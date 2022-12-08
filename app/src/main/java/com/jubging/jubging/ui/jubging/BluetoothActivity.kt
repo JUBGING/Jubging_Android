@@ -20,14 +20,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.jubging.jubging.ApplicationClass.Companion.bluetoothThread
 import com.jubging.jubging.ApplicationClass.Companion.handlerd
+import com.jubging.jubging.data.remote.picture.PictureService
+import com.jubging.jubging.data.remote.picture.PictureView
 import com.jubging.jubging.databinding.ActivityBluetoothBinding
+import com.mummoom.md.data.remote.auth.PictureResponse
 import kotlinx.android.synthetic.main.activity_bluetooth.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.util.*
 
 
-class BluetoothActivity: AppCompatActivity() {
+class BluetoothActivity: AppCompatActivity(),PictureView {
     private var mBinding: ActivityBluetoothBinding? = null
     // 매번 null 체크를 할 필요 없이 편의성을 위해 바인딩 변수 재 선언
     private val binding get() = mBinding!!
@@ -123,6 +130,7 @@ class BluetoothActivity: AppCompatActivity() {
                 this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
                 Log.d("줍깅블루투스",this.intent.getIntExtra("jubjubi_id",0).toString())
                 intent.putExtra("WEIGHT", weight.text)
+                putUri(this.intent.getStringExtra("URI")!!,weight.text.toString())
                 startActivity(intent)
             }
         }
@@ -130,6 +138,19 @@ class BluetoothActivity: AppCompatActivity() {
             finish()
         }
 
+    }
+
+    //사진 서버에 올리기 & 무게 보내주기
+    private fun putUri(uri:String,weight:String){
+        Log.d("카메라 uri", uri)
+        val file = File(uri)
+        var requestFile = RequestBody.create("image/jpg".toMediaTypeOrNull(),file)
+        var body = MultipartBody.Part.createFormData("image",file.name,requestFile)
+        val requestBody = RequestBody.create("text/plain".toMediaTypeOrNull(),weight)
+        PictureService.sendUri(this,body,requestBody)
+        Log.d("카메라풋파일", file.toString())
+        Log.d("카메라 weight requestBody", requestBody.toString())
+        Log.d("카메라풋", body.toString())
     }
 
     private suspend fun bluetoothConnection():Boolean {
@@ -329,5 +350,22 @@ class BluetoothActivity: AppCompatActivity() {
         // onDestroy 에서 binding class 인스턴스 참조를 정리해주어야 한다.
         mBinding = null
         super.onDestroy()
+    }
+
+    override fun onPictureLoading() {
+    }
+
+    override fun onPictureSuccess(pictureResponse: PictureResponse) {
+        Log.d("카메라 성공",pictureResponse.toString())
+    }
+
+    override fun onPictureFailure(errorCode: Int, message: String) {
+        Log.d("카메라 오류",message)
+        when(errorCode){
+            4043 ->{
+                Toast.makeText(this, "진행 중인 줍깅 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
     }
 }

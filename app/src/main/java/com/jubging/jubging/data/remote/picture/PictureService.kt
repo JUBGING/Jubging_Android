@@ -15,14 +15,14 @@ import retrofit2.Response
 
 object PictureService {
 
-//뭘받아서 넣어줄지 uri 부분에
-    fun sendUri(pictureView:PictureView,uri: MultipartBody.Part){
-    Log.d("카메라서비스",uri.toString())
+    fun sendUri(pictureView:PictureView,uri: MultipartBody.Part,weight: RequestBody){
+    Log.d("카메라서비스 uri",uri.toString())
+    Log.d("카메라서비스 weight",weight.toString())
         val pictureService = retrofit.create(PictureRetrofitInterface::class.java)
 
         pictureView.onPictureLoading()
 
-        pictureService.putPicture(uri).enqueue(object : Callback<PictureResponse> {
+        pictureService.putPicture(uri,weight).enqueue(object : Callback<PictureResponse> {
             override fun onResponse(call: Call<PictureResponse>, response: Response<PictureResponse>) {
                 Log.d("카메라uri",uri.toString())
                 if(response.code() == 200){

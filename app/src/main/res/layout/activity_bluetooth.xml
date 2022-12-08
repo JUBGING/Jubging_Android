@@ -28,7 +28,6 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/main_bold"
         android:textColor="@color/black"
-        android:gravity="center"
         android:textSize="30sp"
         />
 
@@ -41,7 +40,6 @@
         android:fontFamily="@font/main_bold"
         android:textColor="@color/black"
         android:text="KG"
-        android:gravity="center"
         android:textSize="30sp"
         />
 
