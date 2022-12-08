@@ -1,10 +1,8 @@
 package com.jubging.jubging.ui.main
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import com.jubging.jubging.R
 import com.jubging.jubging.data.remote.userInfo.GetUserInfoView
 import com.jubging.jubging.data.remote.userInfo.UserInfoService
@@ -85,6 +83,29 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.homeBranchLargeIv.visibility = View.GONE
             binding.homeTreeSmallIv.visibility = View.GONE
             binding.homeTreeMediumIv.visibility = View.GONE
+            binding.homeTreeLargeIv.visibility = View.GONE
+        }
+        else if (point>100 && point<500){
+            binding.homePlantSmallIv.visibility = View.GONE
+            binding.homePlantMediumIv.visibility = View.GONE
+            binding.homePlantLargeIv.visibility = View.GONE
+            binding.homeBranchSmallIv.visibility = View.GONE
+            binding.homeBranchMediumIv.visibility = View.VISIBLE
+            binding.homeBranchLargeIv.visibility = View.GONE
+            binding.homeTreeSmallIv.visibility = View.GONE
+            binding.homeTreeMediumIv.visibility = View.GONE
+            binding.homeTreeLargeIv.visibility = View.GONE
+        }
+
+        else if (point>500){
+            binding.homePlantSmallIv.visibility = View.GONE
+            binding.homePlantMediumIv.visibility = View.GONE
+            binding.homePlantLargeIv.visibility = View.GONE
+            binding.homeBranchSmallIv.visibility = View.GONE
+            binding.homeBranchMediumIv.visibility = View.GONE
+            binding.homeBranchLargeIv.visibility = View.GONE
+            binding.homeTreeSmallIv.visibility = View.GONE
+            binding.homeTreeMediumIv.visibility = View.VISIBLE
             binding.homeTreeLargeIv.visibility = View.GONE
         }
 

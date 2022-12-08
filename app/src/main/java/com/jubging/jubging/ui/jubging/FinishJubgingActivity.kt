@@ -28,7 +28,7 @@ class FinishJubgingActivity : AppCompatActivity(),FinishJubgingView {
             finishJubging()
             val intent = Intent(this, ShareActivity::class.java)
             this.intent.getIntExtra("walk",0)?.let { intent.putExtra("walk", it)}
-            this.intent.getIntExtra("time",0)?.let { intent.putExtra("time", it)}
+            this.intent.getStringExtra("time")?.let { intent.putExtra("time", it)}
             this.intent.getFloatExtra("distance",0.0f)?.let { intent.putExtra("distance", it)}
             this.intent.getFloatExtra("kcal",0.0f)?.let { intent.putExtra("kcal", it)}
             this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
@@ -48,6 +48,7 @@ class FinishJubgingActivity : AppCompatActivity(),FinishJubgingView {
         val stepCnt = intent.getIntExtra("walk",0)
         val tongsReturn = intent.getBooleanExtra("tongs_return",true)
         val jubging = Jubging(tongs_id,jubjubi_id,weight,calorie,distance,stepCnt,tongsReturn)
+        Log.d("줍깅 끝",jubging.toString())
         JubjubiService().finishJubging(this,jubging)
         MainActivity.jubgingCountM +=1
     }

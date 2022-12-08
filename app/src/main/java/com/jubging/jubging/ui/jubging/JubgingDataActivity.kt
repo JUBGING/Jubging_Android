@@ -54,10 +54,10 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
     private val REQUEST_PERMISSION_LOCATION = 10
     private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
-    private var distance =0.0
-    private var time = 0
+    private var distance =0.0f
+    private var time = ""
     private var walk = 0
-    private var kcal = 0.0
+    private var kcal = 0.0f
     private val healthConnectClient by lazy { HealthConnectClient.getOrCreate(context) }
 
     private var startTime = System.currentTimeMillis()
@@ -101,9 +101,9 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
             lifecycleScope.launch {
                 if (hasPermissions()) {
                     walk = 247
-                    distance =1.24
-                    time=34
-                    kcal=12.71
+                    distance =1.24f
+                    time="OO:12:48"
+                    kcal=12.71f
                 }
                 else{
                     Toast.makeText(context, "Health Connect 권한을 확인해주세요.", Toast.LENGTH_SHORT).show()
@@ -145,11 +145,16 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
 
         binding.jubgindDataPlayFl.setOnClickListener{
             endTime = System.currentTimeMillis()
+            walk = 247
+            distance =1.24f
+            time="OO:12:48"
+            kcal=12.71f
             val intent = Intent(this, JipgaeNoticeActivity::class.java)
             intent.putExtra("walk",walk)
             intent.putExtra("distance",distance)
             intent.putExtra("time",time)
             intent.putExtra("kcal",kcal)
+
             this.intent.getIntExtra("jubjubi_id",0).let { intent.putExtra("jubjubi_id", it)}
             this.intent.getIntExtra("tongs_id",0).let { intent.putExtra("tongs_id", it)}
             startActivity(intent)

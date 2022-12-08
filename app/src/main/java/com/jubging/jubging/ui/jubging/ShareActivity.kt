@@ -59,7 +59,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         binding.shareWeightDataTv.text = this.intent.getStringExtra("WEIGHT")
         binding.shareDistanceDataTv.text = this.intent.getFloatExtra("distance",0.0f).toString()
         binding.shareKcalDataTv.text = this.intent.getFloatExtra("kcal",0.0f).toString()
-        binding.shareTimeDataTv.text = this.intent.getIntExtra("time",0).toString()
+        binding.shareTimeDataTv.text = this.intent.getStringExtra("time").toString()
         binding.shareWalkDataTv.text = this.intent.getIntExtra("walk",0).toString()
         //다운로드 버튼 클릭시
         binding.shareDownloadBtnIv.setOnClickListener{
@@ -193,7 +193,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         val logoImageViewBitmap = Bitmap.createBitmap(logoImageView.width, logoImageView.height, Bitmap.Config.ARGB_8888)
         val logoImageViewCanvas = Canvas(logoImageViewBitmap)
         logoImageView.draw(logoImageViewCanvas)
-        val logoImageViewLeft = ((imageViewLeft+imageView.width) - 50 * resources.displayMetrics.density).toFloat()
+        val logoImageViewLeft = ((imageViewLeft+imageView.width) - 60 * resources.displayMetrics.density).toFloat()
         val logoImageViewTop = (imageViewTop + 10 * resources.displayMetrics.density).toFloat()
         canvas.drawBitmap(logoImageViewBitmap, logoImageViewLeft, logoImageViewTop, null)
 
@@ -201,7 +201,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         val dataTextViewBitmap = Bitmap.createBitmap(dataTextView.width, dataTextView.height, Bitmap.Config.ARGB_8888)
         val dataTextViewCanvas = Canvas(dataTextViewBitmap)
         dataTextView.draw(dataTextViewCanvas)
-        val marginBottom = (180 * resources.displayMetrics.density).toInt() // 180dp의 마진
+        val marginBottom = (240 * resources.displayMetrics.density).toInt() // 180dp의 마진
         val dataTextViewLeft = (imageViewLeft + 10 * resources.displayMetrics.density).toFloat()
         val dataTextTextViewTop = imageViewTop + imageView.height - marginBottom
         canvas.drawBitmap(dataTextViewBitmap, dataTextViewLeft, dataTextTextViewTop, null)
@@ -232,7 +232,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         val logoImageViewBitmap = Bitmap.createBitmap(logoImageView.width, logoImageView.height, Bitmap.Config.ARGB_8888)
         val logoImageViewCanvas = Canvas(logoImageViewBitmap)
         logoImageView.draw(logoImageViewCanvas)
-        val logoImageViewLeft = ((imageViewLeft+imageView.width) - 50 * resources.displayMetrics.density).toFloat()
+        val logoImageViewLeft = ((imageViewLeft+imageView.width) - 60 * resources.displayMetrics.density).toFloat()
         val logoImageViewTop = (imageViewTop + 10 * resources.displayMetrics.density).toFloat()
         canvas.drawBitmap(logoImageViewBitmap, logoImageViewLeft, logoImageViewTop, null)
 
@@ -240,7 +240,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         val dataTextViewBitmap = Bitmap.createBitmap(dataTextView.width, dataTextView.height, Bitmap.Config.ARGB_8888)
         val dataTextViewCanvas = Canvas(dataTextViewBitmap)
         dataTextView.draw(dataTextViewCanvas)
-        val marginBottom = (180 * resources.displayMetrics.density).toInt() // 180dp의 마진
+        val marginBottom = (240 * resources.displayMetrics.density).toInt() // 180dp의 마진
         val dataTextViewLeft = (imageViewLeft + 10 * resources.displayMetrics.density).toFloat()
         val dataTextTextViewTop = imageViewTop + imageView.height - marginBottom
         canvas.drawBitmap(dataTextViewBitmap, dataTextViewLeft, dataTextTextViewTop, null)

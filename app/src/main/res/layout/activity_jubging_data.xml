@@ -67,12 +67,11 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/loading"
-            app:layout_constraintTop_toTopOf="@id/jubging_data_rotate_iv"
-            app:layout_constraintStart_toStartOf="@id/jubging_data_rotate_iv"
-            app:layout_constraintEnd_toEndOf="@id/jubging_data_rotate_iv"
-            app:layout_constraintBottom_toBottomOf="@id/jubging_data_rotate_iv"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/jubging_data_loading_tv"
+
             />
 
         <TextView
