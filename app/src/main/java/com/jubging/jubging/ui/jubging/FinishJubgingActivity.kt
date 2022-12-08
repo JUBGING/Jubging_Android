@@ -30,7 +30,7 @@ class FinishJubgingActivity : AppCompatActivity(),FinishJubgingView {
             this.intent.getIntExtra("walk",0)?.let { intent.putExtra("walk", it)}
             this.intent.getStringExtra("time")?.let { intent.putExtra("time", it)}
             this.intent.getFloatExtra("distance",0.0f)?.let { intent.putExtra("distance", it)}
-            this.intent.getFloatExtra("kcal",0.0f)?.let { intent.putExtra("kcal", it)}
+            this.intent.getIntExtra("kcal",0)?.let { intent.putExtra("kcal", it)}
             this.intent.getStringExtra("URI")?.let { intent.putExtra("URI", it)}
             this.intent.getStringExtra("WEIGHT")?.let { intent.putExtra("WEIGHT", it)}
             startActivity(intent)

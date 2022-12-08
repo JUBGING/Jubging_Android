@@ -85,7 +85,7 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.homeTreeMediumIv.visibility = View.GONE
             binding.homeTreeLargeIv.visibility = View.GONE
         }
-        else if (point>100 && point<500){
+        else if (point in 100..799){
             binding.homePlantSmallIv.visibility = View.GONE
             binding.homePlantMediumIv.visibility = View.GONE
             binding.homePlantLargeIv.visibility = View.GONE
@@ -97,7 +97,7 @@ class HomeFragment(): BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inf
             binding.homeTreeLargeIv.visibility = View.GONE
         }
 
-        else if (point>500){
+        else {
             binding.homePlantSmallIv.visibility = View.GONE
             binding.homePlantMediumIv.visibility = View.GONE
             binding.homePlantLargeIv.visibility = View.GONE

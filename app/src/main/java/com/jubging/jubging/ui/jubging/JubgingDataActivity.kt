@@ -57,7 +57,7 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
     private var distance =0.0f
     private var time = ""
     private var walk = 0
-    private var kcal = 0.0f
+    private var kcal = 0
     private val healthConnectClient by lazy { HealthConnectClient.getOrCreate(context) }
 
     private var startTime = System.currentTimeMillis()
@@ -103,7 +103,7 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
                     walk = 247
                     distance =1.24f
                     time="OO:12:48"
-                    kcal=12.71f
+                    kcal=12
                 }
                 else{
                     Toast.makeText(context, "Health Connect 권한을 확인해주세요.", Toast.LENGTH_SHORT).show()
@@ -148,7 +148,7 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
             walk = 247
             distance =1.24f
             time="OO:12:48"
-            kcal=12.71f
+            kcal=12
             val intent = Intent(this, JipgaeNoticeActivity::class.java)
             intent.putExtra("walk",walk)
             intent.putExtra("distance",distance)
