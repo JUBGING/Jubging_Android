@@ -228,7 +228,7 @@
             app:layout_constraintEnd_toStartOf="@id/home_goal_before_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13"
+            android:text="23"
             android:fontFamily="@font/bold_num"
             android:textColor="@color/black"
             android:textSize="13sp" />

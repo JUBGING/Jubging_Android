@@ -1,15 +1,26 @@
 package com.jubging.jubging.ui.jubging
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.health.connect.client.HealthConnectClient
+import androidx.health.connect.client.PermissionController
+import androidx.health.connect.client.permission.HealthPermission
+import androidx.health.connect.client.records.*
+import androidx.health.connect.client.request.ChangesTokenRequest
+import androidx.health.connect.client.request.ReadRecordsRequest
+import androidx.health.connect.client.time.TimeRangeFilter
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,6 +28,15 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
+
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import com.jubging.jubging.R
 import com.jubging.jubging.databinding.ActivityJubgingDataBinding
 
 
@@ -38,8 +58,69 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
     private var time = 0
     private var walk = 0
     private var kcal = 0.0
+    private val healthConnectClient by lazy { HealthConnectClient.getOrCreate(context) }
+
+    private var startTime = System.currentTimeMillis()
+    private var endTime = System.currentTimeMillis()
+
+    private val permissionsLauncher =
+        registerForActivityResult(
+            PermissionController.createRequestPermissionResultContract()
+        ) { granted ->
+            if (granted.containsAll(PERMISSIONS))
+                //성공시
+            else
+                onPermissionDenied()
+        }
+
+    private fun requestPermission() = permissionsLauncher.launch(PERMISSIONS)
+
+    private fun onPermissionDenied() {
+         requestPermission()
+    }
+
+    val PERMISSIONS =
+        setOf(
+        HealthPermission.createReadPermission(StepsRecord::class),
+        HealthPermission.createReadPermission(DistanceRecord::class),
+        HealthPermission.createReadPermission(TotalCaloriesBurnedRecord::class),
+        HealthPermission.createReadPermission(ActiveCaloriesBurnedRecord::class),
+        //EXERCISE_TYPE_WALKING = 79
+        HealthPermission.createReadPermission(ExerciseSessionRecord::class)
+
+    )
 
 
+    suspend fun hasPermissions():Boolean {
+        val granted = healthConnectClient.permissionController.getGrantedPermissions(PERMISSIONS)
+    Log.d("체인지토큰",granted.toString())
+        return granted.containsAll(PERMISSIONS)
+    }
+
+    private fun checkHealthConnectAndPermissions() {
+            lifecycleScope.launch {
+                if (hasPermissions()) {
+                    walk = 247
+                    distance =1.24
+                    time=34
+                    kcal=12.71
+                }
+                else{
+                    Toast.makeText(context, "Health Connect 권한을 확인해주세요.", Toast.LENGTH_SHORT).show()
+                    onPermissionDenied()
+                }
+            }
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        checkHealthConnectAndPermissions()
+    }
+
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJubgingDataBinding.inflate(layoutInflater)
@@ -60,13 +141,10 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
         val mapFragment: SupportMapFragment = supportFragmentManager.findFragmentById(com.jubging.jubging.R.id.jubging_data_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.jubgingDataWalk.text = walk.toString()
-        binding.jubgingDataDistance.text = distance.toString()
-        binding.jubgingDataTime.text = time.toString()
-        binding.jubgingDataKcal.text = kcal.toString()
 
 
         binding.jubgindDataPlayFl.setOnClickListener{
+            endTime = System.currentTimeMillis()
             val intent = Intent(this, JipgaeNoticeActivity::class.java)
             intent.putExtra("walk",walk)
             intent.putExtra("distance",distance)
@@ -75,8 +153,51 @@ class JubgingDataActivity(): AppCompatActivity(),OnMapReadyCallback{
             this.intent.getIntExtra("jubjubi_id",0).let { intent.putExtra("jubjubi_id", it)}
             this.intent.getIntExtra("tongs_id",0).let { intent.putExtra("tongs_id", it)}
             startActivity(intent)
-        }
+            lifecycleScope.launch {
 
+                val response = healthConnectClient.readRecords(
+                    ReadRecordsRequest(
+                        ExerciseSessionRecord::class,
+                        timeRangeFilter = TimeRangeFilter.Companion.between(timeToDate(startTime),timeToDate(endTime))
+                    )
+                )
+                Log.d("리코드",response.toString())
+                Log.d("리코드1",response.records.toString())
+                for(exerciseRecord in response.records){
+                    val stepsRecord = healthConnectClient.readRecords(
+                        ReadRecordsRequest(
+                            StepsRecord::class,
+                            timeRangeFilter = TimeRangeFilter.between(
+                                exerciseRecord.startTime,
+                                exerciseRecord.endTime
+
+
+                            )
+                        )
+                    )
+                        .records
+                }
+            }
+
+        }
+        startTime = System.currentTimeMillis()
+
+        val animation = AnimationUtils.loadAnimation(
+            applicationContext, R.xml.rotate
+        )
+        binding.jubgingDataRotateIv.startAnimation(animation)
+
+    }
+
+
+
+    private fun timeToDate(time : Long): LocalDateTime{
+        val date = Date(time)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+        val getTime = dateFormat.format(date)
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val dateTime: LocalDateTime = LocalDateTime.parse(getTime, formatter)
+        return dateTime
     }
 
 
