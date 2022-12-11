@@ -109,6 +109,7 @@ class JubjubiService {
         finishJubgingService.finishJubging(jubging).clone().enqueue(object : Callback<FinishJubgingResponse>{
             override fun onResponse(call: Call<FinishJubgingResponse>, response: Response<FinishJubgingResponse>) {
 
+                //Log.d("끝줍깅 에러바디",response.errorBody()!!.string())
                 if(response.code() == 200){
                     val resp = response.body()!!
                     finishJubgingView.onFinishJubgingSuccess(resp)

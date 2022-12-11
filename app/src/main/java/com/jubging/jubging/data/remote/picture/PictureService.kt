@@ -25,6 +25,7 @@ object PictureService {
         pictureService.putPicture(uri,weight).enqueue(object : Callback<PictureResponse> {
             override fun onResponse(call: Call<PictureResponse>, response: Response<PictureResponse>) {
                 Log.d("카메라uri",uri.toString())
+                //Log.d("카메라 오류",response.errorBody()!!.string())
                 if(response.code() == 200){
                     val resp = response.body()!!
 ;                    pictureView.onPictureSuccess(resp)

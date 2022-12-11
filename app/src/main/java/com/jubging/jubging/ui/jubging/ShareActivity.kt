@@ -59,7 +59,7 @@ class ShareActivity: BaseActivity<ActivityShareBinding>(ActivityShareBinding::in
         binding.shareWeightDataTv.text = this.intent.getStringExtra("WEIGHT")
         binding.shareDistanceDataTv.text = this.intent.getFloatExtra("distance",0.0f).toString()
         binding.shareKcalDataTv.text = this.intent.getIntExtra("kcal",0).toString()
-        binding.shareTimeDataTv.text = this.intent.getStringExtra("time").toString()
+        binding.shareTimeDataTv.text = this.intent.getStringExtra("time")
         binding.shareWalkDataTv.text = this.intent.getIntExtra("walk",0).toString()
         //다운로드 버튼 클릭시
         binding.shareDownloadBtnIv.setOnClickListener{

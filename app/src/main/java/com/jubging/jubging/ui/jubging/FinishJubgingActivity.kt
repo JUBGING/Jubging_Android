@@ -47,6 +47,7 @@ class FinishJubgingActivity : AppCompatActivity(),FinishJubgingView {
         val distance = intent.getFloatExtra("distance",0.0f)
         val stepCnt = intent.getIntExtra("walk",0)
         val tongsReturn = intent.getBooleanExtra("tongs_return",true)
+
         val jubging = Jubging(tongs_id,jubjubi_id,weight,calorie,distance,stepCnt,tongsReturn)
         Log.d("줍깅 끝",jubging.toString())
         JubjubiService().finishJubging(this,jubging)
@@ -63,19 +64,19 @@ class FinishJubgingActivity : AppCompatActivity(),FinishJubgingView {
     override fun onFinishJubgingFailure(errorCode: Int, message: String) {
         when(errorCode){
             4040 ->{
-                Toast.makeText(TedPermissionProvider.context, "로그인 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "로그인 정보가 없습니다.", Toast.LENGTH_SHORT).show()
                 return
             }
             4041 ->{
-                Toast.makeText(TedPermissionProvider.context, "집게 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "집게 정보가 없습니다.", Toast.LENGTH_SHORT).show()
                 return
             }
             4042 ->{
-                Toast.makeText(TedPermissionProvider.context, "줍줍이 정보가 없dmfRKdy.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "줍줍이 정보가 없dmfRKdy.", Toast.LENGTH_SHORT).show()
                 return
             }
             4043 ->{
-                Toast.makeText(TedPermissionProvider.context, "진행 중인 줍깅 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "진행 중인 줍깅 정보가 없습니다.", Toast.LENGTH_SHORT).show()
                 return
             }
         }

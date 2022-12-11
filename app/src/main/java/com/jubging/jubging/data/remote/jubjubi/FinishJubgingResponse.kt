@@ -12,5 +12,4 @@ data class FinishJubgingResponse(
     @SerializedName("distance") val distance: Float,
     @SerializedName("step_cnt") val stepCnt: Int,
     @SerializedName("tongs_return") val tongsReturn: Boolean,
-
     )
